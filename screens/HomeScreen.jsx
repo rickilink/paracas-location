@@ -3,8 +3,9 @@ import React from "react";
 import { selectCounter, setCounter } from "../redux/slices/counterSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 
-export function HomeScreen() {
+export default function HomeScreen() {
   const navigation = useNavigation();
   const counter = useSelector(selectCounter);
   const dispatch = useDispatch();
@@ -12,18 +13,24 @@ export function HomeScreen() {
   const updateValue = () => {
     dispatch(setCounter({ counter: counter + 1 }));
   };
+
   return (
     <SafeAreaView className="flex-1 mt-10 justify-center items-center">
       <Text className=" my-3">{counter}</Text>
       <Button title="Press" onPress={updateValue}></Button>
       <Button
+        title="Login"
+        onPress={() => navigation.navigate("Login")}
+      ></Button>
+      <Button
         title="Profile"
         onPress={() => navigation.navigate("Profile")}
       ></Button>
       <Button
-        title="FetchUsers"
-        onPress={() => navigation.navigate("Users")}
+        title="SignUp"
+        onPress={() => navigation.navigate("SignUp")}
       ></Button>
+      <StatusBar />
     </SafeAreaView>
   );
 }

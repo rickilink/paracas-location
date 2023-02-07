@@ -11,6 +11,7 @@
     "build:android": "eas build --platform android"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.4",
     "@react-navigation/native-stack": "^6.9.9",
     "@reduxjs/toolkit": "^1.9.2",
     "expo": "~47.0.12",
