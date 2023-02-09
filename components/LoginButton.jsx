@@ -3,7 +3,6 @@ import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 
 export function LoginButton({ promptAsync }) {
-  console.log("loginbutton");
   return (
     <TouchableOpacity
       onPress={() => {

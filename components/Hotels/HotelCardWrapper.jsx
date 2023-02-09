@@ -13,23 +13,12 @@ export default function HotelCardWrapper() {
     <View className="flex-row  justify-between pb-16">
       <View className="">
         {rightHotels?.map((hotel) => (
-          <HotelCard
-            key={hotel.id}
-            hotelName={hotel.name}
-            image={hotel.image}
-            price={hotel.price}
-          />
+          <HotelCard key={hotel.id} {...hotel} />
         ))}
       </View>
       <View className="mt-10">
         {leftHotels?.map((hotel) => (
-          <HotelCard
-            side="right"
-            key={hotel.id}
-            hotelName={hotel.name}
-            image={hotel.image}
-            price={hotel.price}
-          />
+          <HotelCard side="right" key={hotel.id} {...hotel} />
         ))}
       </View>
     </View>

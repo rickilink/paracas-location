@@ -10,11 +10,6 @@ export default function ImageSection() {
   const hotels = useSelector((state) => state.hotel.hotels);
   const Sponsors = hotels?.filter((ht) => ht.isSponsor);
 
-  useState(() => {
-    console.log("useEffect");
-    console.log(Sponsors);
-  }, []);
-
   return (
     <View className="mt-3 px-6">
       {/* Images container */}

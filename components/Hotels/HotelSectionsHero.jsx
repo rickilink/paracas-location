@@ -1,8 +1,12 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import HotelSectionCard from "./HotelSectionCard";
+import { useSelector } from "react-redux";
 
 export default function HotelSectionsHero() {
+  const hotels = useSelector((state) => state.hotel.hotels);
+  const hotelsWithDiscount = hotels?.filter((hot) => hot.discount);
+
   return (
     <View>
       <View className="flex-row space-x-3">
@@ -18,7 +22,9 @@ export default function HotelSectionsHero() {
       </View>
       {/* Cards */}
       <View className="pt-3 ">
-        <HotelSectionCard />
+        {hotelsWithDiscount?.map((hotel) => (
+          <HotelSectionCard key={hotel.id} {...hotel} />
+        ))}
       </View>
     </View>
   );
