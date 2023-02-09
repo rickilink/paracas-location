@@ -1,10 +1,19 @@
-import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import { View, Text, ScrollView, Image } from "react-native";
+import React, { useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getSponsorHotel } from "../../redux/slices/hotelSlice";
 
 export default function ImageSection() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
+  const dispatch = useDispatch();
+  const hotels = useSelector((state) => state.hotel.hotels);
+  const Sponsors = hotels?.filter((ht) => ht.isSponsor);
+
+  useState(() => {
+    console.log("useEffect");
+    console.log(Sponsors);
+  }, []);
 
   return (
     <View className="mt-3 px-6">
@@ -14,6 +23,13 @@ export default function ImageSection() {
 
         {/* Image 1 */}
         <View className="relative w-full h-[300px] bg-secondary-background rounded-md">
+          <Image
+            source={{
+              uri: Sponsors[0]?.image,
+            }}
+            className="w-full h-full rounded-md"
+          />
+          <View className="absolute w-full h-[40px] bottom-0 rounded-t-2xl rounded-b-md bg-black opacity-40"></View>
           {/* Bottom left marker */}
           <View className="absolute bottom-0 left-0">
             <View className="flex-row items-center p-3">
