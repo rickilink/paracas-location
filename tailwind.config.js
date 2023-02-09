@@ -10,9 +10,10 @@ module.exports = {
     extend: {
       colors: {
         "primary-contrast": "#1BC4B9",
-        "secondary-contrast": "rgba(27, 0, 192, 0.5)",
+        "primary-danger": "#F13E48",
         "primary-text": "#444A5F",
         "primary-background": "#EAEDED",
+        "secondary-contrast": "rgba(27, 0, 192, 0.5)",
         "secondary-background": "#D9D9D9",
         "button-text": "#FFFFFF",
         "dark-primary-contrast": "#1BC4B9",

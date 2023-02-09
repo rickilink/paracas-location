@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Icons
-import IconButton from "react-native-vector-icons/Ionicons";
+import IconIonicons from "react-native-vector-icons/Ionicons";
 import IconAnt from "react-native-vector-icons/AntDesign";
 //Screens
 import LogInScreen from "./screens/LogInScreen";
@@ -11,6 +11,9 @@ import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import MessagesScreen from "./screens/MessagesScreen";
+import { useSelector } from "react-redux";
+import HotelsScreen from "./screens/HotelSection/HotelsScreen";
+import HotelSelectedScreen from "./screens/HotelSection/HotelSelectedScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -26,8 +29,71 @@ function MyStackHome() {
         }}
       />
       <StackHomeScreen.Screen
+        name="Login"
+        component={LogInScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
         name="Profile"
         component={ProfileScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="Hotels"
+        component={HotelsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="HotelSelected"
+        component={HotelSelectedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </StackHomeScreen.Navigator>
+  );
+}
+/* 
+function MyStackHotel() {
+  return (
+    <StackHotelScreen.Navigator initialRouteName="Home">
+      <StackHomeScreen.Screen
+        name="Hotels"
+        component={HotelsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHotelScreen.Screen
+        name="HotelSelected"
+        component={HotelSelectedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </StackHotelScreen.Navigator>
+  );
+} */
+
+function MyStackProfile() {
+  return (
+    <StackHomeScreen.Navigator initialRouteName="Home">
+      <StackHomeScreen.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{
           headerShown: false,
         }}
@@ -37,11 +103,21 @@ function MyStackHome() {
 }
 
 function MyTabs() {
+  const { primaryContrast, primaryText, secondaryBackground } = useSelector(
+    (state) => state.theme.colors
+  );
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: "#1BC4B9",
+        tabBarActiveTintColor: primaryContrast,
+        tabBarInactiveTintColor: primaryText,
+        tabBarStyle: {
+          backgroundColor: secondaryBackground,
+          borderTopEndRadius: 10,
+          borderTopStartRadius: 10,
+        },
       }}
     >
       <Tab.Screen
@@ -51,7 +127,7 @@ function MyTabs() {
           headerShown: false,
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
-            <IconButton name="home" color={color} size={size} />
+            <IconIonicons name="home" color={color} size={size} />
           ),
         }}
       />
@@ -74,7 +150,18 @@ function MyTabs() {
           headerShown: false,
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <IconButton name="settings-sharp" color={color} size={size} />
+            <IconIonicons name="settings-sharp" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ProfilesTabScreen"
+        component={MyStackProfile}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <IconAnt name="user" color={color} size={size} />
           ),
         }}
       />

@@ -5,7 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import IconButton from "react-native-vector-icons/Entypo";
-import { WideButton } from "../components/Widebutton";
+import { WideButton } from "../components/WideButton";
 
 export default function SignUpScreen() {
   const navigation = useNavigation();
