@@ -5,7 +5,8 @@ const hotelSlice = createSlice({
   initialState: {
     hotels: [],
     loading: false,
-    filter: "isSponsor",
+    filter: [],
+    FeaturesToFilter: [],
   },
   reducers: {
     setHotel: (state, action) => {
@@ -19,9 +20,34 @@ const hotelSlice = createSlice({
         return state;
       }
     },
+    setFeaturesToFilter: (state, action) => {
+      return {
+        ...state,
+        FeaturesToFilter: action.payload,
+      };
+    },
+    setFilter: (state) => {
+      const filteredHotels = state.hotels.filter((hotel) =>
+        state.FeaturesToFilter.every((feature) =>
+          hotel.features.includes(feature)
+        )
+      );
+
+      if (filteredHotels.length > 0) {
+        return {
+          ...state,
+          filter: filteredHotels,
+        };
+      } else {
+        return {
+          ...state,
+          filter: [],
+        };
+      }
+    },
   },
 });
 
-export const { setHotel } = hotelSlice.actions;
+export const { setHotel, setFilter, setFeaturesToFilter } = hotelSlice.actions;
 
 export default hotelSlice.reducer;

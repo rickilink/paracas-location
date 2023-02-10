@@ -1,4 +1,11 @@
-import { View, Text, Modal, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconIoicons from "react-native-vector-icons/Ionicons";
@@ -6,10 +13,12 @@ import IconIoicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import ModalFilterByFeature from "./ModalFilterByFeature";
-import { setFeaturesToFilter, setFilter } from "../../redux/slices/hotelSlice";
-import ModalFilterPrice from "./ModalFilterPrice";
 
-export default function HotelFilterModal() {
+import ModalFilterPrice from "./ModalFilterPrice";
+import { WideButton } from "../WideButton";
+import ModalBookRoom from "./Modal/ModalBookRoom";
+
+export default function HotelBookModal() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
   const filter = useSelector((state) => state.hotel.FeaturesToFilter);
 
@@ -22,8 +31,10 @@ export default function HotelFilterModal() {
 
   const handleFilter = () => {
     setModalVisible(false);
-  };
+    Alert.alert("Gracias por Utilizar esta Demo", "Grax");
 
+    navigation.navigate("Home");
+  };
   return (
     <View className="relative items-center justify-center  ">
       <Modal
@@ -47,10 +58,7 @@ export default function HotelFilterModal() {
             <View className="m-6 h-screen rounded-lg  ">
               {/* Body */}
               <View className="pb-3">
-                <ModalFilterByFeature />
-              </View>
-              <View>
-                <ModalFilterPrice />
+                <ModalBookRoom />
               </View>
             </View>
             <View className="absolute bottom-3 items-center justify-center w-screen px-6">
@@ -59,7 +67,7 @@ export default function HotelFilterModal() {
                 className="bg-primary-contrast h-[70px] rounded-lg w-full justify-center items-center"
               >
                 <Text className="font-bold text-button-text text-lg ">
-                  Filter
+                  Create Application Request
                 </Text>
               </TouchableOpacity>
             </View>
@@ -70,17 +78,12 @@ export default function HotelFilterModal() {
 
       {/* Modal Initial Button */}
 
-      <TouchableOpacity onPress={() => handleOpenModal()}>
-        <View className=" items-center justify-center">
-          <IconIoicons name="filter" size={30} color={primaryContrast} />
-          {filter.length > 0 && (
-            <View className="absolute top-0 right-0 w-5 h-5 bg-red-500 rounded-full items-center justify-center ">
-              <Text className="font-bold text-button-text">
-                {filter.length}
-              </Text>
-            </View>
-          )}
-        </View>
+      <TouchableOpacity
+        onPress={handleOpenModal}
+        className="w-full mb-3 h-[70px] bg-primary-contrast rounded-md items-center justify-center"
+      >
+        {/* TODO: fix this button */}
+        <Text className="text-button-text font-bold text-xl">Book For 20$</Text>
       </TouchableOpacity>
       {/* //Modal Initial Button End*/}
     </View>

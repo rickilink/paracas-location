@@ -17,12 +17,6 @@ export default function TopPlacesSection() {
             Top Places
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Hotels")}
-          className=" bg-secondary-background p-2 rounded-md"
-        >
-          <Text>Hotels</Text>
-        </TouchableOpacity>
       </View>
 
       {/* Body Section */}

@@ -5,20 +5,28 @@ import { useSelector } from "react-redux";
 
 export default function HotelCardWrapper() {
   const hotels = useSelector((state) => state.hotel.hotels);
+  const filteredHotels = useSelector((state) => state.hotel.filter);
+  let leftHotels = [];
+  let rightHotels = [];
 
-  const leftHotels = hotels.filter((hotel, index) => index % 2 === 1);
-  const rightHotels = hotels.filter((hotel, index) => index % 2 !== 1);
+  if (filteredHotels.length > 0) {
+    leftHotels = filteredHotels.filter((hotel, index) => index % 2 === 1);
+    rightHotels = filteredHotels.filter((hotel, index) => index % 2 !== 1);
+  } else {
+    leftHotels = hotels.filter((hotel, index) => index % 2 === 1);
+    rightHotels = hotels.filter((hotel, index) => index % 2 !== 1);
+  }
 
   return (
     <View className="flex-row  justify-between pb-16">
       <View className="">
-        {rightHotels?.map((hotel) => (
-          <HotelCard key={hotel.id} {...hotel} />
+        {rightHotels?.map((hotel, index) => (
+          <HotelCard key={index} {...hotel} />
         ))}
       </View>
       <View className="mt-10">
-        {leftHotels?.map((hotel) => (
-          <HotelCard side="right" key={hotel.id} {...hotel} />
+        {leftHotels?.map((hotel, index) => (
+          <HotelCard side="right" key={index} {...hotel} />
         ))}
       </View>
     </View>

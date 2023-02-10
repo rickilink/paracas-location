@@ -7,7 +7,7 @@ export default function HotelSelectedImages({ image, location, gallery }) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
 
   return (
-    <View className="pt-3">
+    <View className="pt-3 ">
       {/* Images */}
 
       {/*TODO: add scroll*/}
@@ -19,8 +19,8 @@ export default function HotelSelectedImages({ image, location, gallery }) {
           className="relative w-[90%] h-[300px] bg-secondary-background rounded-md  object-contain "
         />
       )}
-      <ScrollView horizontal>
-        <View className="flex-row space-x-3 ">
+      <ScrollView horizontal className="">
+        <View className="flex-row space-x-3  ">
           {gallery &&
             gallery.map((pic, i) => (
               <View key={i}>
@@ -40,7 +40,7 @@ export default function HotelSelectedImages({ image, location, gallery }) {
       </ScrollView>
 
       {/* Location */}
-      <View className="flex-row space-x-3 items-center pt-3">
+      <View className="flex-row space-x-3 items-center pt-3 px-3">
         <IconEntypo name="location-pin" size={30} color={primaryContrast} />
         <Text className="text-primary-text font-semibold">
           {location || "Paracas - Ica"}

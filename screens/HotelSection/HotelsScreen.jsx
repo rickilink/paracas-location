@@ -13,7 +13,7 @@ export default function HotelsScreen() {
     <View className="pt-8 px-6 bg-primary-background flex-1">
       <View>
         <HotelsHeader />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <HotelSectionsHero />
           <HotelPopularStays />
         </ScrollView>
