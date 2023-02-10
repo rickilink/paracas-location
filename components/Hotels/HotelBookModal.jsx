@@ -18,7 +18,7 @@ import ModalFilterPrice from "./ModalFilterPrice";
 import { WideButton } from "../WideButton";
 import ModalBookRoom from "./Modal/ModalBookRoom";
 
-export default function HotelBookModal() {
+export default function HotelBookModal({ price }) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
   const filter = useSelector((state) => state.hotel.FeaturesToFilter);
 
@@ -83,7 +83,9 @@ export default function HotelBookModal() {
         className="w-full mb-3 h-[70px] bg-primary-contrast rounded-md items-center justify-center"
       >
         {/* TODO: fix this button */}
-        <Text className="text-button-text font-bold text-xl">Book For 20$</Text>
+        <Text className="text-button-text font-bold text-xl">
+          Book For {price || "$20"}
+        </Text>
       </TouchableOpacity>
       {/* //Modal Initial Button End*/}
     </View>

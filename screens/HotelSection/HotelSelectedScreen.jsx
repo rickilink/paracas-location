@@ -37,7 +37,7 @@ export default function HotelSelectedScreen() {
         </View>
       </ScrollView>
 
-      <HotelBookModal />
+      <HotelBookModal price={props.price} />
     </View>
   );
 }
