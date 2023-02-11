@@ -11,7 +11,7 @@ import useTheme from "../../hooks/useTheme.js";
 
 import { window } from "./constants";
 
-function CarrouselComponent({ images }) {
+function CarrouselComponent({ images, autoplayInterval }) {
   const { primaryContrast, secondaryBackground } = useTheme();
   const PAGE_WIDTH = window.width;
   const colors = [
@@ -57,7 +57,7 @@ function CarrouselComponent({ images }) {
         pagingEnabled={pagingEnabled}
         snapEnabled={snapEnabled}
         autoPlay={autoPlay}
-        autoPlayInterval={2000}
+        autoPlayInterval={autoplayInterval || 2500}
         onProgressChange={(_, absoluteProgress) =>
           (progressValue.value = absoluteProgress)
         }

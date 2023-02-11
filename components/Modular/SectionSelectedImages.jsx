@@ -47,7 +47,9 @@ export default function SectionSelectedImages({ image, location, gallery }) {
               </View>
             ))} */}
 
-        {gallery && <CarrouselComponent images={gallery} />}
+        {gallery && (
+          <CarrouselComponent images={gallery} autoplayInterval={3000} />
+        )}
       </View>
 
       {/* Location */}
