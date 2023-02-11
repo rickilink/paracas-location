@@ -20,13 +20,13 @@ export default function ImageSection() {
   }
 
   return (
-    <View className="mt-3 px-6">
+    <View className="mt-3 ">
       {/* Images container */}
       <View>
         {/*  //TODO: scrollView horizontal */}
         <View className="relative w-full h-[300px]  rounded-md">
-          <ScrollView horizontal>
-            <View className="flex-row space-x-3  ">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View className="flex-row space-x-3 px-6  ">
               {Sponsors.map((hotel, i) => (
                 <TouchableOpacity
                   onPress={() => handleSelectedHotel(hotel)}

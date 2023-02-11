@@ -1,7 +1,7 @@
 import { doc, getDocs, collection } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../firebase.config";
-import { setHotel } from "../redux/slices/hotelSlice";
+import { setHotel, setHotelTopPlaces } from "../redux/slices/hotelSlice";
 
 export const fetchHotels = async () => {
   const dispatch = useDispatch();
@@ -30,5 +30,11 @@ function useFilter() {
 function useFilterByFilteredFeatures() {
   return useSelector((state) => state.hotel.FeaturesToFilter);
 }
+function useHotelTopPlaces() {
+  const dispatch = useDispatch();
 
-export { useHotels, useFilterByFilteredFeatures, useFilter };
+  dispatch(setHotelTopPlaces());
+  return useSelector((state) => state.hotel.topPaces);
+}
+
+export { useHotels, useFilterByFilteredFeatures, useFilter, useHotelTopPlaces };

@@ -7,6 +7,7 @@ const hotelSlice = createSlice({
     loading: false,
     filter: [],
     FeaturesToFilter: [],
+    topPlaces: [],
   },
   reducers: {
     setHotel: (state, action) => {
@@ -45,10 +46,18 @@ const hotelSlice = createSlice({
         };
       }
     },
+    setHotelTopPlaces: (state) => {
+      const topPlaced = state.hotels.filter((hotel) => hotel.topPlace);
+      return {
+        ...state,
+        topPlaces: topPlaced,
+      };
+    },
   },
 });
 
-export const { setHotel, setFilter, setFeaturesToFilter } = hotelSlice.actions;
+export const { setHotel, setFilter, setFeaturesToFilter, setHotelTopPlaces } =
+  hotelSlice.actions;
 
 export function filterHotelsByDiscount(hotels) {
   return hotels.filter((hotel) => hotel.discount);
