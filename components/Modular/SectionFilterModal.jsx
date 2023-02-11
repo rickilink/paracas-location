@@ -2,18 +2,31 @@ import { View, Text, Modal, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconIoicons from "react-native-vector-icons/Ionicons";
+import useTheme from "../../hooks/useTheme";
 
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
 import ModalFilterByFeature from "./ModalFilterByFeature";
-import { setFeaturesToFilter, setFilter } from "../../redux/slices/hotelSlice";
-import ModalFilterPrice from "./ModalFilterPrice";
+import ModalFilterPrice from "../Hotels/ModalFilterPrice";
+import { useFilterByFilteredFeatures } from "../../hooks/useHotels";
+import { useRestaurantFilterByFilteredFeatures } from "../../hooks/useRestaurant";
 
-export default function HotelFilterModal() {
-  const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const filter = useSelector((state) => state.hotel.FeaturesToFilter);
+export default function SectionFilterModal({ type, Items }) {
+  let filter = [];
+  const { primaryContrast } = useTheme();
 
-  const navigation = useNavigation();
+  switch (type) {
+    case "hotel":
+      filter = useFilterByFilteredFeatures();
+
+      break;
+    case "restaurant":
+      filter = useRestaurantFilterByFilteredFeatures();
+      break;
+    default:
+      console.warn("UNknow sectionFilterModal 25");
+
+      break;
+  }
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleOpenModal = () => {
@@ -47,7 +60,11 @@ export default function HotelFilterModal() {
             <View className="m-6 h-screen rounded-lg  ">
               {/* Body */}
               <View className="pb-3">
-                <ModalFilterByFeature />
+                <ModalFilterByFeature
+                  type={type}
+                  filter={filter}
+                  Items={Items}
+                />
               </View>
               <View>
                 <ModalFilterPrice />

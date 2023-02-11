@@ -9,16 +9,6 @@ export default function ModalBookRoom() {
   const [bedroomsValue, onChangeBedrooms] = useState("");
   const [typeValue, onChangeType] = useState("");
 
-  /*   setMessage({
-    destination: destinationValue,
-    date: dateValue,
-    nights: nightsValue,
-    guests: guestsValue,
-    bedrooms: bedroomsValue,
-    type: typeValue,
-  }); */
-
-  console.log(destinationValue);
   return (
     <View>
       <View className="mb-3">

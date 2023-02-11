@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function HotelSelectedAbout({ description }) {
+export default function SectionSelectedAbout({ description }) {
   return (
     <View className="mt-6">
       <Text className="font-bold text-xl text-primary-text capitalize mb-3">

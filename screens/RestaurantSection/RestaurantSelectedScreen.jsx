@@ -1,14 +1,13 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React from "react";
 import SectionSelectedHeader from "../../components/Modular/SectionSelectedHeader";
 import SectionSelectedImages from "../../components/Modular/SectionSelectedImages";
 import SectionSelectedFeatures from "../../components/Modular/SectionSelectedFeatures";
 import SectionSelectedAbout from "../../components/Modular/SectionSelectedAbout";
-import { WideButton } from "../../components/WideButton";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import HotelBookModal from "../../components/Hotels/HotelBookModal";
 
-export default function HotelSelectedScreen() {
+export default function RestaurantSelectedScreen() {
   const {
     params: { ItemDetails },
   } = useRoute();
@@ -41,7 +40,7 @@ export default function HotelSelectedScreen() {
         </View>
       </ScrollView>
 
-      <HotelBookModal price={ItemDetails.price} />
+      {/*  <HotelBookModal price={props.price} /> */}
     </View>
   );
 }

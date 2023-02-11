@@ -1,10 +1,10 @@
 import { View, Text, ScrollView, Image } from "react-native";
 import React from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
-import { useSelector } from "react-redux";
+import useTheme from "../../hooks/useTheme";
 
-export default function HotelSelectedImages({ image, location, gallery }) {
-  const { primaryContrast } = useSelector((state) => state.theme.colors);
+export default function SectionSelectedImages({ image, location, gallery }) {
+  const { primaryContrast } = useTheme();
 
   return (
     <View className="pt-3 ">

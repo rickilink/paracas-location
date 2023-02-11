@@ -2,14 +2,29 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-export default function HotelCard(props) {
+export default function SectionCard(props) {
   const navigation = useNavigation();
-  const shadowHeigh = props.name.length > 20 ? 12 : 10;
+  const shadowHeigh = props.item.name.length > 20 ? 12 : 10;
+  const ItemDetails = props.item;
 
   const handleNavigation = () => {
-    navigation.navigate("HotelSelected", {
-      props,
-    });
+    switch (props.type) {
+      case "hotel":
+        navigation.navigate("HotelSelected", {
+          ItemDetails,
+        });
+
+        break;
+      case "restaurant":
+        navigation.navigate("RestaurantSelected", {
+          ItemDetails,
+        });
+        break;
+      default:
+        console.warn("UNknow SectionCard 23");
+
+        break;
+    }
   };
   return (
     <TouchableOpacity
@@ -20,10 +35,10 @@ export default function HotelCard(props) {
           : "relative w-40 h-40 bg-secondary-background  rounded-tr-xl rounded-bl-xl p-3 m-1 mb-3"
       }
     >
-      {props?.image && (
+      {props?.item.image && (
         <Image
           source={{
-            uri: props?.image,
+            uri: props?.item.image,
           }}
           className={
             props.side === "right"
@@ -55,17 +70,17 @@ export default function HotelCard(props) {
         }
       >
         <Text className="text-button-text font-bold">
-          {props?.rating || "4.9"}
+          {props?.item.rating || "4.9"}
         </Text>
       </View>
 
       <Text className="font-semibold text-button-text capitalize max-w-[115px] decoration-clone ">
-        {props?.name || "HotelCard"}
+        {props?.item.name || "HotelCard"}
       </Text>
 
       <View className="absolute bottom-0 left-0  m-3 space-y-0">
         <Text className="text-button-text text-lg ">
-          {props?.price || "$99"}
+          {props?.item.price || "$99"}
         </Text>
         <Text className="text-button-text font-thin">per night</Text>
       </View>

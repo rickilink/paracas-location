@@ -50,4 +50,13 @@ const hotelSlice = createSlice({
 
 export const { setHotel, setFilter, setFeaturesToFilter } = hotelSlice.actions;
 
+export function filterHotelsByDiscount(hotels) {
+  return hotels.filter((hotel) => hotel.discount);
+}
+export function filterHotelByName(searchTerm) {
+  return hotels.filter((hotel) =>
+    hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
+
 export default hotelSlice.reducer;
