@@ -13,8 +13,9 @@ export default function ImageSection() {
   const Sponsors = hotels?.filter((ht) => ht.isSponsor);
 
   function handleSelectedHotel(props) {
+    let ItemDetails = props;
     navigation.navigate("HotelSelected", {
-      props,
+      ItemDetails,
     });
   }
 
@@ -23,7 +24,7 @@ export default function ImageSection() {
       {/* Images container */}
       <View>
         {/*  //TODO: scrollView horizontal */}
-        <View className="relative w-full h-[300px] bg-secondary-background rounded-md">
+        <View className="relative w-full h-[300px]  rounded-md">
           <ScrollView horizontal>
             <View className="flex-row space-x-3  ">
               {Sponsors.map((hotel, i) => (

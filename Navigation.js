@@ -14,6 +14,8 @@ import MessagesScreen from "./screens/MessagesScreen";
 import { useSelector } from "react-redux";
 import HotelsScreen from "./screens/HotelSection/HotelsScreen";
 import HotelSelectedScreen from "./screens/HotelSection/HotelSelectedScreen";
+import RestaurantsScreen from "./screens/RestaurantSection/RestaurantsScreen";
+import RestaurantSelectedScreen from "./screens/RestaurantSection/RestaurantSelectedScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -41,6 +43,7 @@ function MyStackHome() {
         options={{
           headerShown: false,
         }}
+        /* Hotels Section */
       />
       <StackHomeScreen.Screen
         name="Hotels"
@@ -52,6 +55,21 @@ function MyStackHome() {
       <StackHomeScreen.Screen
         name="HotelSelected"
         component={HotelSelectedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <StackHomeScreen.Screen
+        name="Restaurants"
+        component={RestaurantsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="RestaurantSelected"
+        component={RestaurantSelectedScreen}
         options={{
           headerShown: false,
         }}
@@ -59,27 +77,6 @@ function MyStackHome() {
     </StackHomeScreen.Navigator>
   );
 }
-/* 
-function MyStackHotel() {
-  return (
-    <StackHotelScreen.Navigator initialRouteName="Home">
-      <StackHomeScreen.Screen
-        name="Hotels"
-        component={HotelsScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <StackHotelScreen.Screen
-        name="HotelSelected"
-        component={HotelSelectedScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </StackHotelScreen.Navigator>
-  );
-} */
 
 function MyStackProfile() {
   return (

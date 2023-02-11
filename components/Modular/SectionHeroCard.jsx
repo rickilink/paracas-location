@@ -5,17 +5,20 @@ import Features from "../Features";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-export default function HotelSectionCard(props) {
+export default function SectionHeroCard(props) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
   const navigation = useNavigation();
 
+  function handleRedirect() {
+    const ItemDetails = props;
+    navigation.navigate("HotelSelected", {
+      ItemDetails,
+    });
+  }
+
   return (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate("HotelSelected", {
-          props,
-        })
-      }
+      onPress={() => handleRedirect()}
       className="relative w-full h-[180px] bg-secondary-background rounded-xl"
     >
       <Image

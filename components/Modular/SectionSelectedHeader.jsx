@@ -1,15 +1,15 @@
 import { View, Text } from "react-native";
 import React from "react";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
-import { useSelector } from "react-redux";
+import useTheme from "../../hooks/useTheme";
 
-export default function HotelSelectedHeader({ name, rating }) {
-  const { primaryContrast } = useSelector((state) => state.theme.colors);
+export default function SectionSelectedHeader({ name, rating }) {
+  const { primaryContrast } = useTheme();
 
   return (
     <View className="mt-3">
       <Text className="text-3xl font-bold text-primary-text capitalize">
-        {name || "Hotel selected name"}
+        {name || " selected name"}
       </Text>
       <View className="flex-row space-x-3 items-center pt-3">
         <IconAntDesign name="star" size={24} color={primaryContrast} />

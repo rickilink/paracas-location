@@ -1,8 +1,8 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import Features from "../../Features";
+import Features from "../Features";
 
-export default function HotelSelectedFeatures({ features }) {
+export default function SectionSelectedFeatures({ features }) {
   return (
     <View className="pt-3">
       <Text className="text-xl font-bold text-primary-text mb-3">Features</Text>
@@ -17,19 +17,6 @@ export default function HotelSelectedFeatures({ features }) {
             ))}
         </View>
       </View>
-      {/* 
-        <View>
-          <Features name="open pool" />
-        </View>
-        <View>
-          <Features name="Breakfast" />
-        </View>
-        <View>
-          <Features name="Bar" />
-        </View>
-        <View>
-          <Features name="restaurant" />
-        </View> */}
     </View>
   );
 }

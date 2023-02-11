@@ -8,20 +8,11 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import IconFeather from "react-native-vector-icons/Feather";
-import IconIoicons from "react-native-vector-icons/Ionicons";
-
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import ModalFilterByFeature from "./ModalFilterByFeature";
 
-import ModalFilterPrice from "./ModalFilterPrice";
-import { WideButton } from "../WideButton";
 import ModalBookRoom from "./Modal/ModalBookRoom";
 
 export default function HotelBookModal({ price }) {
-  const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const filter = useSelector((state) => state.hotel.FeaturesToFilter);
-
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
 

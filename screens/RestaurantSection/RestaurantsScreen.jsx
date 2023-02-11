@@ -6,26 +6,23 @@ import SectionHero from "../../components/Modular/SectionHero";
 import SectionPopularStays from "../../components/Modular/SectionPopularStays";
 import { useHotels, useFilterByFiltered } from "../../hooks/useHotels";
 
-import { filterHotelsByDiscount } from "../../redux/slices/hotelSlice";
-import { useSelector } from "react-redux";
+import { filterRestaurantsByDiscount } from "../../redux/slices/restaurantSlice";
+import { useRestaurants } from "../../hooks/useRestaurant";
 
 // query import { collection, query, where, getDocs } from "firebase/firestore";
 
-export default function HotelsScreen() {
-  const hotels = useHotels();
-  const filteredHotels = filterHotelsByDiscount(hotels);
-
-  /*   const filter = useFilterByFiltered(); */
-
-  //const q = query(collection(db, "hotels"), where("capital", "==", true))
+export default function RestaurantScreen() {
+  const restaurants = useRestaurants(); //TODO: change Name
+  const filteredRestaurants = filterRestaurantsByDiscount(restaurants); //TODO: change Name
 
   return (
     <View className="pt-8 px-6 bg-primary-background flex-1">
       <View>
-        <SectionHeader title="Hotels" />
+        <SectionHeader title="restaurant" />
+        {/*TODO: Change Name */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SectionHero filteredByDiscount={filteredHotels} />
-          <SectionPopularStays type="hotel" Items={hotels} />
+          <SectionHero filteredByDiscount={filteredRestaurants} />
+          <SectionPopularStays type="restaurant" Items={restaurants} />
         </ScrollView>
       </View>
     </View>
