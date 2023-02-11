@@ -1,10 +1,20 @@
-import { View, Text, ScrollView, Image } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
+import React, { useCallback, useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import useTheme from "../../hooks/useTheme";
+import CarrouselComponent from "../Carrousel/Carrousel";
 
 export default function SectionSelectedImages({ image, location, gallery }) {
   const { primaryContrast } = useTheme();
+
+  const width = Dimensions.get("window").width;
 
   return (
     <View className="pt-3 ">
@@ -19,9 +29,9 @@ export default function SectionSelectedImages({ image, location, gallery }) {
           className="relative w-[90%] h-[300px] bg-secondary-background rounded-md  object-contain "
         />
       )}
-      <ScrollView horizontal className="">
-        <View className="flex-row space-x-3  ">
-          {gallery &&
+
+      <View className="flex-row space-x-3  ">
+        {/* {gallery &&
             gallery.map((pic, i) => (
               <View key={i}>
                 <Image
@@ -35,9 +45,10 @@ export default function SectionSelectedImages({ image, location, gallery }) {
                   i + 1
                 } / ${gallery.length}`}</Text>
               </View>
-            ))}
-        </View>
-      </ScrollView>
+            ))} */}
+
+        {gallery && <CarrouselComponent images={gallery} />}
+      </View>
 
       {/* Location */}
       <View className="flex-row space-x-3 items-center pt-3 px-3">
