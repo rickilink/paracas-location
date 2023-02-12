@@ -5,6 +5,7 @@ import authReducer from "./slices/authSlice.js";
 import themeReducer from "./slices/themeSlice.js";
 import hotelReducer from "./slices/hotelSlice.js";
 import restaurantReducer from "./slices/restaurantSlice.js";
+import searchReducer from "./slices/searchSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     theme: themeReducer,
     hotel: hotelReducer,
     restaurant: restaurantReducer,
+    search: searchReducer,
   },
 });

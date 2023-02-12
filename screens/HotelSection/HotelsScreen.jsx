@@ -14,8 +14,8 @@ export default function HotelsScreen() {
   return (
     <View className="pt-8 px-6 bg-primary-background flex-1">
       <View>
-        <SectionHeader title="Hotels" />
         <ScrollView showsVerticalScrollIndicator={false}>
+          <SectionHeader title="Hotels" />
           <SectionHero filteredByDiscount={filteredHotels} />
           <SectionPopularStays type="hotel" Items={hotels} />
         </ScrollView>
