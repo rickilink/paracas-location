@@ -6,6 +6,8 @@ import themeReducer from "./slices/themeSlice.js";
 import hotelReducer from "./slices/hotelSlice.js";
 import restaurantReducer from "./slices/restaurantSlice.js";
 import searchReducer from "./slices/searchSlice.js";
+import tourReducer from "./slices/tourSlice.js";
+import marketReducer from "./slices/marketSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +18,7 @@ export const store = configureStore({
     hotel: hotelReducer,
     restaurant: restaurantReducer,
     search: searchReducer,
+    tour: tourReducer,
+    market: marketReducer,
   },
 });

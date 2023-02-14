@@ -1,0 +1,18 @@
+/* interface  hotels {
+    id: string,
+    name: string,
+    features: Array<string> ,
+    gallery: Array<string> ,
+    image: string,
+    type: string,
+    discount: boolean,
+    discountAmount : string,
+    discountTime: string,
+    topReserved : boolean,
+    topVisited  : boolean,
+    topPlace : boolean,
+    rating : string,
+    price: string,
+    description : string,
+    isSponsor : boolean,
+} */

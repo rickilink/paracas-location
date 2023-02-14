@@ -8,7 +8,14 @@ export default function SectionCard(props) {
   const ItemDetails = props.item;
 
   const handleNavigation = () => {
-    switch (props.type) {
+    const linkToNavigate = `${props.type
+      .charAt(0)
+      .toUpperCase()}${props.type.slice(1)}Selected`;
+
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
+    /*switch (props.type) {
       case "hotel":
         navigation.navigate("HotelSelected", {
           ItemDetails,
@@ -20,11 +27,16 @@ export default function SectionCard(props) {
           ItemDetails,
         });
         break;
+      case "tour":
+        navigation.navigate("TourSelected", {
+          ItemDetails,
+        });
+        break;
       default:
         console.warn("UNknow SectionCard 23");
 
         break;
-    }
+    } */
   };
   return (
     <TouchableOpacity
@@ -54,14 +66,16 @@ export default function SectionCard(props) {
             : `absolute w-40  bg-black  rounded-tr-xl rounded-bl-2xl  opacity-30 h-${shadowHeigh}`
         }
       ></View>
+      {props.type === "hotel" && (
+        <View
+          className={
+            props.side === "right"
+              ? "absolute w-16 h-14 bg-black bottom-0 rounded-tr-xl  opacity-30 "
+              : "absolute w-16 h-14 bg-black bottom-0 rounded-tr-xl rounded-bl-xl  opacity-30"
+          }
+        ></View>
+      )}
 
-      <View
-        className={
-          props.side === "right"
-            ? "absolute w-16 h-14 bg-black bottom-0 rounded-tr-xl  opacity-30 "
-            : "absolute w-16 h-14 bg-black bottom-0 rounded-tr-xl rounded-bl-xl  opacity-30"
-        }
-      ></View>
       <View
         className={
           props.side === "right"
@@ -77,14 +91,15 @@ export default function SectionCard(props) {
       <Text className="font-semibold text-button-text capitalize max-w-[115px] decoration-clone ">
         {props?.item.name || "HotelCard"}
       </Text>
-
-      <View className="absolute bottom-0 left-0  m-3 space-y-0">
-        {/* TODO: erase this when is restaurant type */}
-        <Text className="text-button-text text-lg ">
-          {props?.item.price || "$99"}
-        </Text>
-        <Text className="text-button-text font-thin">per night</Text>
-      </View>
+      {props.type === "hotel" && (
+        <View className="absolute bottom-0 left-0  m-3 space-y-0">
+          {/* TODO: erase this when is restaurant type */}
+          <Text className="text-button-text text-lg ">
+            {props?.item.price || "$99"}
+          </Text>
+          <Text className="text-button-text font-thin">per night</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 }

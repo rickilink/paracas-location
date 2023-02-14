@@ -12,8 +12,14 @@ export default function TopSections(props) {
 
   function handleRedirect(to) {
     const ItemDetails = to;
+    const linkToNavigate = `${to.type.charAt(0).toUpperCase()}${to.type.slice(
+      1
+    )}Selected`;
 
-    switch (to.type) {
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
+    /* switch (to.type) {
       case "hotel":
         navigation.navigate("HotelSelected", {
           ItemDetails,
@@ -26,10 +32,16 @@ export default function TopSections(props) {
         });
 
         break;
+      case "tour":
+        navigation.navigate("TourSelected", {
+          ItemDetails,
+        });
+
+        break;
       default:
         console.warn("Header in HOmeScreen line 67");
         break;
-    }
+    } */
   }
 
   switch (props.type) {

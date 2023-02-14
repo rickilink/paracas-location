@@ -12,9 +12,37 @@ export default function SectionHeroCard(props) {
 
   function handleRedirect() {
     const ItemDetails = props;
-    navigation.navigate("HotelSelected", {
+
+    const linkToNavigate = `${props.type
+      .charAt(0)
+      .toUpperCase()}${props.type.slice(1)}Selected`;
+
+    navigation.navigate(linkToNavigate, {
       ItemDetails,
     });
+    /* switch (props.type) {
+      case "hotel":
+        navigation.navigate("HotelSelected", {
+          ItemDetails,
+        });
+
+        break;
+      case "restaurant":
+        navigation.navigate("RestaurantSelected", {
+          ItemDetails,
+        });
+
+        break;
+      case "tour":
+        navigation.navigate("TourSelected", {
+          ItemDetails,
+        });
+
+        break;
+      default:
+        console.warn("Header in HOmeScreen line 67");
+        break;
+    } */
   }
 
   return (

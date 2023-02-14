@@ -13,6 +13,7 @@ export default function SectionPopularStays({ type, Items }) {
         </Text>
 
         <SectionFilterModal type={type} Items={Items} />
+        {/* Inside Switch */}
       </View>
       {/* Cards */}
       <View>

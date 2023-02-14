@@ -13,7 +13,15 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
 
   const handleNavigation = (prop) => {
     const ItemDetails = prop;
-    switch (prop.type) {
+
+    const linkToNavigate = `${prop.type
+      .charAt(0)
+      .toUpperCase()}${prop.type.slice(1)}Selected`;
+
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
+    /* switch (prop.type) {
       case "hotel":
         navigation.navigate("HotelSelected", {
           ItemDetails,
@@ -29,7 +37,7 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
         console.warn("UNknow SectionCard 23");
 
         break;
-    }
+    } */
   };
 
   return (

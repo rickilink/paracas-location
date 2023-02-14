@@ -7,12 +7,19 @@ import {
   setRestaurantFeaturesToFilter,
   setRestaurantFilter,
 } from "../../redux/slices/restaurantSlice";
+import {
+  setTourFeaturesToFilter,
+  setTourFilter,
+} from "../../redux/slices/tourSlice";
 
 export default function ModalFilterByFeature({ type, filter, Items }) {
   let FeaturesToFilter = filter;
-  let allFeatures = []; //get all features in all items
+  let allFeatures = Items?.reduce(
+    (features, item) => [...features, ...item.features],
+    []
+  ); //get all features in all items
 
-  switch (type) {
+  /* switch (type) {
     case "hotel":
       allFeatures = Items?.reduce(
         (features, item) => [...features, ...item.features],
@@ -26,10 +33,16 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         []
       );
       break;
+    case "tour":
+      allFeatures = Items?.reduce(
+        (features, item) => [...features, ...item.features],
+        []
+      );
+      break;
     default:
       console.warn("UNknow modalfilterByFeature 30");
       break;
-  }
+  } */
 
   const dispatch = useDispatch();
   const uniqueFeatures = [...new Set(allFeatures)];
@@ -60,6 +73,19 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
           );
         }
         dispatch(setRestaurantFilter());
+
+        break;
+      case "tour": // Case Restaurant
+        if (FeaturesToFilter.includes(feature)) {
+          dispatch(
+            setTourFeaturesToFilter(
+              FeaturesToFilter.filter((f) => f !== feature)
+            )
+          );
+        } else {
+          dispatch(setTourFeaturesToFilter([...FeaturesToFilter, feature]));
+        }
+        dispatch(setTourFilter());
 
         break;
       default:

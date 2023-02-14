@@ -11,9 +11,14 @@ export default function LastVisited(props) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
 
   function handleRedirect(to) {
+    const linkToNavigate = `${to.type.charAt(0).toUpperCase()}${to.type.slice(
+      1
+    )}Selected`;
     const ItemDetails = to;
-
-    switch (to.type) {
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
+    /* switch (to.type) {
       case "hotel":
         navigation.navigate("HotelSelected", {
           ItemDetails,
@@ -26,10 +31,16 @@ export default function LastVisited(props) {
         });
 
         break;
+      case "tour":
+        navigation.navigate("TourSelected", {
+          ItemDetails,
+        });
+
+        break;
       default:
         console.warn("Header in HOmeScreen line 67");
         break;
-    }
+    } */
   }
 
   return (

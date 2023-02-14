@@ -15,13 +15,17 @@ export default function ImageSection({ hotels }) {
   const Sponsors = hotels?.filter((ht) => ht.isSponsor);
 
   function handleRedirect(to) {
+    const linkToNavigate = `${to.type.charAt(0).toUpperCase()}${to.type.slice(
+      1
+    )}Selected`;
     const ItemDetails = to;
 
-    switch (to.type) {
-      case "hotel":
-        navigation.navigate("HotelSelected", {
-          ItemDetails,
-        });
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
+
+    /*   switch (to.type) {
+      
 
         break;
       case "restaurant":
@@ -30,10 +34,16 @@ export default function ImageSection({ hotels }) {
         });
 
         break;
+      case "tour":
+        navigation.navigate("TourSelected", {
+          ItemDetails,
+        });
+
+        break;
       default:
         console.warn("Header in HOmeScreen line 67");
         break;
-    }
+    } */
   }
 
   return (

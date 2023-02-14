@@ -1,40 +1,35 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { useState } from "react";
+import { SafeAreaView, ScrollView, View } from "react-native";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import Header from "../components/HomeScreen/Header.jsx";
 import ImageSection from "../components/HomeScreen/ImageSection.jsx";
 import Sections from "../components/Modular/Sections.jsx";
 import { useSelector } from "react-redux";
-import {
-  fetchHotels,
-  useHotels,
-  useHotelTopPlaces,
-} from "../hooks/useHotels.js";
-import { useNavigation } from "@react-navigation/native";
+import { fetchHotels, useHotels } from "../hooks/useHotels.js";
 import { fetchRestaurants, useRestaurants } from "../hooks/useRestaurant.js";
 import { fetchUsers, useUsers } from "../hooks/useUsers.js";
 import TopNavigationButton from "../components/HomeScreen/TopNavigationButton.jsx";
+import { fetchTours, useTours } from "../hooks/useTours.js";
+import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
 
 export default function HomeScreen() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
   const Buttons = [
     { title: "Hotels", navigationUrl: "Hotels" },
     { title: "Restaurants", navigationUrl: "Restaurants" },
+    { title: "Tours", navigationUrl: "Tours" },
+    { title: "Markets", navigationUrl: "Markets" },
     { title: "Taxis" },
-    { title: "Tours" },
     { title: "Exchange" },
-    { title: "Markets" },
     { title: "Services" },
   ];
 
   let users = useUsers();
-  const navigation = useNavigation();
+
+  let tours = useTours();
+
+  let markets = useMarkets();
+
   let hotels = useHotels();
   const topPlacesHotels = hotels?.filter((hot) => hot.topPlace);
   const topReservedHotels = hotels?.filter((hot) => hot.topReserved);
@@ -60,14 +55,23 @@ export default function HomeScreen() {
   if (users.length <= 0) {
     fetchUsers();
   }
+  if (tours.length <= 0) {
+    fetchTours();
+  }
+  if (markets.length <= 0) {
+    fetchMarkets();
+  }
 
   return (
     <SafeAreaView className="bg-primary-background">
       <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header contains search input */}
         <Header
           hotels={hotels}
           restaurants={restaurants}
           currentUser={users[0]}
+          tours={tours}
+          markets={markets}
         />
         <View className="pb-32">
           <ImageSection hotels={hotels} />

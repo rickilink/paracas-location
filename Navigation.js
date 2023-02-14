@@ -16,6 +16,10 @@ import HotelsScreen from "./screens/HotelSection/HotelsScreen";
 import HotelSelectedScreen from "./screens/HotelSection/HotelSelectedScreen";
 import RestaurantsScreen from "./screens/RestaurantSection/RestaurantsScreen";
 import RestaurantSelectedScreen from "./screens/RestaurantSection/RestaurantSelectedScreen";
+import ToursScreen from "./screens/ToursSection/ToursScreen";
+import TourSelectedScreen from "./screens/ToursSection/TourSelectedScreen";
+import MarketsScreen from "./screens/MarketSection/MarketsScreen";
+import MarketSelectedScreen from "./screens/MarketSection/MarketSelectedScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -70,6 +74,35 @@ function MyStackHome() {
       <StackHomeScreen.Screen
         name="RestaurantSelected"
         component={RestaurantSelectedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <StackHomeScreen.Screen
+        name="Tours"
+        component={ToursScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="TourSelected"
+        component={TourSelectedScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="Markets"
+        component={MarketsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="MarketSelected"
+        component={MarketSelectedScreen}
         options={{
           headerShown: false,
         }}

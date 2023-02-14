@@ -3,6 +3,8 @@ import React from "react";
 import SectionCard from "./SectionCard";
 import { useFilter } from "../../hooks/useHotels";
 import { useRestaurantFilter } from "../../hooks/useRestaurant";
+import { useTourFilter } from "../../hooks/useTours";
+import { useMarketFilter } from "../../hooks/useMarkets";
 
 export default function SectionCardWrapper({ Items, type }) {
   let FilteredItems = [];
@@ -12,13 +14,19 @@ export default function SectionCardWrapper({ Items, type }) {
   switch (type) {
     case "hotel":
       FilteredItems = useFilter();
-
       break;
     case "restaurant":
       FilteredItems = useRestaurantFilter();
       break;
+    case "tour":
+      FilteredItems = useTourFilter();
+      break;
+    case "market":
+      FilteredItems = useMarketFilter();
+      break;
+
     default:
-      console.warn("UNknow SectionCardwraper 21");
+      console.warn("UNknow SectionCardWrapper 21");
 
       break;
   }

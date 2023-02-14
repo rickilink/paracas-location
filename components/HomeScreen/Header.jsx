@@ -7,13 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import IconFeather from "react-native-vector-icons/Feather";
 
-export default function Header({ hotels, restaurants, currentUser }) {
+export default function Header({
+  hotels,
+  restaurants,
+  currentUser,
+  tours,
+  markets,
+}) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const navigation = useNavigation();
   const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const dispatch = useDispatch();
-  const arrayOfAll = [...hotels, ...restaurants];
+  const navigation = useNavigation();
+  const arrayOfAll = [...hotels, ...restaurants, ...tours, ...markets];
 
   const foundItemsByName = (nameToMatch) =>
     arrayOfAll.filter((item) =>
@@ -26,38 +31,20 @@ export default function Header({ hotels, restaurants, currentUser }) {
     ItemsFilteredByName = [];
   }
 
-  /* dispatch(setSearchResultsByHotel(ItemsFilteredByName)); */
-
   function closeSearch() {
     setExpanded(!expanded);
     setSearchValue("");
   }
 
-  /*  const filteredHotels = state.hotels.filter((hotel) =>
-        state.FeaturesToFilter.every((feature) =>
-          hotel.features.includes(feature)
-        ) */
-
   function handleNavigation(props) {
+    const linkToNavigate = `${props.type
+      .charAt(0)
+      .toUpperCase()}${props.type.slice(1)}Selected`;
     const ItemDetails = props;
 
-    switch (props.type) {
-      case "hotel":
-        navigation.navigate("HotelSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "restaurant":
-        navigation.navigate("RestaurantSelected", {
-          ItemDetails,
-        });
-
-        break;
-      default:
-        console.warn("Header in HOmeScreen line 67");
-        break;
-    }
+    navigation.navigate(linkToNavigate, {
+      ItemDetails,
+    });
   }
   return (
     <View className="mt-10 px-3">

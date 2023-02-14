@@ -8,6 +8,8 @@ import ModalFilterByFeature from "./ModalFilterByFeature";
 import ModalFilterPrice from "../Hotels/ModalFilterPrice";
 import { useFilterByFilteredFeatures } from "../../hooks/useHotels";
 import { useRestaurantFilterByFilteredFeatures } from "../../hooks/useRestaurant";
+import { useTourFilterByFilteredFeatures } from "../../hooks/useTours";
+import { useMarketFilterByFilteredFeatures } from "../../hooks/useMarkets";
 
 export default function SectionFilterModal({ type, Items }) {
   let filter = [];
@@ -20,6 +22,12 @@ export default function SectionFilterModal({ type, Items }) {
       break;
     case "restaurant":
       filter = useRestaurantFilterByFilteredFeatures();
+      break;
+    case "tour":
+      filter = useTourFilterByFilteredFeatures();
+      break;
+    case "market":
+      filter = useMarketFilterByFilteredFeatures();
       break;
     default:
       console.warn("UNknow sectionFilterModal 25");
