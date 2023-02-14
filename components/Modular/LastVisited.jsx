@@ -5,37 +5,43 @@ import IconsMaterialCommunityIcons from "react-native-vector-icons/MaterialCommu
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
-export default function TopPlacesSection(props) {
-  let arrayToNavigate = [];
+export default function LastVisited(props) {
+  let arrayToNavigate = props.Visited;
   const navigation = useNavigation();
   const { primaryContrast } = useSelector((state) => state.theme.colors);
 
-  function handleRedirect(props) {
-    const ItemDetails = props;
-    navigation.navigate("HotelSelected", {
-      ItemDetails,
-    });
-  }
+  function handleRedirect(to) {
+    const ItemDetails = to;
 
-  switch (props.type) {
-    case "Top Places":
-      arrayToNavigate = props.TopPlaces;
-      break;
-    case "Top Reserved":
-      arrayToNavigate = props.topReserved;
-      break;
-    case "Top Visited":
-      arrayToNavigate = props.topVisited;
-      break;
+    switch (to.type) {
+      case "hotel":
+        navigation.navigate("HotelSelected", {
+          ItemDetails,
+        });
+
+        break;
+      case "restaurant":
+        navigation.navigate("RestaurantSelected", {
+          ItemDetails,
+        });
+
+        break;
+      default:
+        console.warn("Header in HOmeScreen line 67");
+        break;
+    }
   }
 
   return (
     <View className="w-screen ">
       {/* Top left Button */}
-      <View className="flex-row items-center space-x-2 px-6">
-        <TouchableOpacity className=" w-1/3 h-[40px] rounded-md bg-primary-contrast items-center justify-center">
-          <Text className="text-button-text font-semibold capitalize">
-            {props.type || "Section"}
+      <View className="flex-row items-center justify-between px-6">
+        <Text className="text-primary-text text-xl font-semibold capitalize">
+          {props.type || "Section"}
+        </Text>
+        <TouchableOpacity>
+          <Text className="text-primary-contrast font-semibold italic text-lg">
+            see all
           </Text>
         </TouchableOpacity>
       </View>
@@ -47,31 +53,35 @@ export default function TopPlacesSection(props) {
             <TouchableOpacity
               onPress={() => handleRedirect(tp)}
               key={index}
-              className=" relative bg-secondary-background w-[300px] h-[180px] rounded-md p-3"
+              className=" relative bg-secondary-background w-[300px] h-[200px] rounded-md p-3"
             >
               <Image
-                className=" absolute bg-secondary-background w-[300px] h-[180px] rounded-md "
+                className=" absolute bg-secondary-background w-[300px] h-[200px] rounded-md "
                 source={{
                   uri: tp.image,
                 }}
               />
+              {tp.topPlace | tp.topReserved | tp.topVisited && (
+                <View className="absolute bg-primary-background  w-16 h-8 top-[0px] right-0  rounded-br-xl rounded-tl-xl items-center justify-center z-10 "></View>
+              )}
 
-              <View className="absolute bg-primary-background  w-20 h-10 top-0 right-0  rounded-br-xl rounded-tl-xl items-center justify-center z-10 "></View>
               <View className="absolute bg-black opacity-30  w-[300px] h-16 top-0 left-0  rounded-t-md rounded-b-xl  items-center justify-center "></View>
               <View className="flex-row justify-between ">
                 <Text className="font-bold capitalize text-button-text text-xl">
                   {tp.name || "Title Hotel"}
                 </Text>
-                <View className="flex-row space-x-1 items-center z-20">
-                  <IconsMaterialCommunityIcons
-                    name="fire"
-                    size={20}
-                    color={primaryContrast}
-                  />
-                  <Text className="font-semibold capitalize text-primary-text z-20">
-                    3 offers
-                  </Text>
-                </View>
+                {tp.topPlace | tp.topReserved | tp.topVisited && (
+                  <View className="absolute flex-row space-x-1 items-center z-20 -top-[5px] right-0">
+                    <IconsMaterialCommunityIcons
+                      name="fire"
+                      size={20}
+                      color={primaryContrast}
+                    />
+                    <Text className="font-semibold italic text-primary-text z-20">
+                      TOP
+                    </Text>
+                  </View>
+                )}
               </View>
               <Text className="font-light text-button-text">
                 Nov 30, 2023 - Dec 24, 2023

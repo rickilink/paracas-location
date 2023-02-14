@@ -11,8 +11,8 @@ export default function Features({ name, color }) {
       <Text
         className={
           color
-            ? "p-3 text-button-text capitalize"
-            : "p-3 text-primary-text capitalize"
+            ? "p-2 text-button-text capitalize"
+            : "p-2 text-primary-text capitalize"
         }
       >
         {name || "Feature"}

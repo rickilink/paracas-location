@@ -10,15 +10,18 @@ import SettingHeader from "../components/Settings/SettingHeader";
 import SettingOptions from "../components/Settings/SettingOptions";
 import IconMaterialIcons from "react-native-vector-icons/MaterialIcons";
 import IconEvilIcons from "react-native-vector-icons/EvilIcons";
+import { useUsers } from "../hooks/useUsers";
 
 import { useSelector } from "react-redux";
 
 export default function SettingsScreen() {
+  let users = useUsers();
+
   const { primaryDanger } = useSelector((state) => state.theme.colors);
   return (
     <SafeAreaView className=" bg-primary-background flex-1">
       <View className="px-6">
-        <SettingHeader />
+        <SettingHeader currentUser={users[0]} />
         <ScrollView>
           <View className="pb-6">
             <SettingOptions title="Your Info" />

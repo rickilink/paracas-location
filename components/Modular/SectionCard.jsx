@@ -79,6 +79,7 @@ export default function SectionCard(props) {
       </Text>
 
       <View className="absolute bottom-0 left-0  m-3 space-y-0">
+        {/* TODO: erase this when is restaurant type */}
         <Text className="text-button-text text-lg ">
           {props?.item.price || "$99"}
         </Text>

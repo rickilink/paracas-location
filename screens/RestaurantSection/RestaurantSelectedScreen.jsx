@@ -6,6 +6,8 @@ import SectionSelectedFeatures from "../../components/Modular/SectionSelectedFea
 import SectionSelectedAbout from "../../components/Modular/SectionSelectedAbout";
 import { useRoute } from "@react-navigation/native";
 import HotelBookModal from "../../components/Hotels/HotelBookModal";
+import SectionSelectedOpeningHours from "../../components/Modular/SectionSelectedOpeningHours";
+import SectionSelectedReviews from "../../components/Modular/SectionSelectedReviews";
 
 export default function RestaurantSelectedScreen() {
   const {
@@ -20,27 +22,38 @@ export default function RestaurantSelectedScreen() {
             <SectionSelectedHeader
               name={ItemDetails.name || "name"}
               rating={ItemDetails.rating || "rating"}
+              type={ItemDetails.type || "type"}
             />
           </View>
-          <View className=" px-1">
+          <View className="px-1 ">
             <SectionSelectedImages
               image={ItemDetails.image || "image"}
               location={ItemDetails.location || "location"}
               gallery={ItemDetails.gallery || "gallery"}
             />
           </View>
-          <View className=" px-6">
-            <SectionSelectedFeatures
-              features={ItemDetails.features || "features"}
-            />
-            <SectionSelectedAbout
-              description={ItemDetails.description || "features"}
-            />
+          <View className=" px-6 pt-3">
+            {ItemDetails.features && (
+              <SectionSelectedFeatures
+                features={ItemDetails.features || "features"}
+              />
+            )}
+            <SectionSelectedOpeningHours />
+            {ItemDetails.description && (
+              <SectionSelectedAbout
+                description={ItemDetails.description || "features"}
+              />
+            )}
+            {ItemDetails.reviews && (
+              <SectionSelectedReviews
+                reviews={ItemDetails.reviews || "reviews"}
+              />
+            )}
           </View>
         </View>
       </ScrollView>
 
-      {/*  <HotelBookModal price={props.price} /> */}
+      <HotelBookModal price={ItemDetails.price} />
     </View>
   );
 }

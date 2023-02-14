@@ -8,7 +8,9 @@ export default function SectionPopularStays({ type, Items }) {
     <View className="pt-3 ">
       {/* header */}
       <View className="flex-row justify-between items-center mb-3">
-        <Text className="text-xl font-bold ">Popular Stays</Text>
+        <Text className="text-xl font-bold text-primary-text ">
+          Popular Stays
+        </Text>
 
         <SectionFilterModal type={type} Items={Items} />
       </View>

@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import React, { useCallback, useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
+import IconFeather from "react-native-vector-icons/Feather";
+import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import useTheme from "../../hooks/useTheme";
 import CarrouselComponent from "../Carrousel/Carrousel";
 
@@ -17,7 +19,7 @@ export default function SectionSelectedImages({ image, location, gallery }) {
   const width = Dimensions.get("window").width;
 
   return (
-    <View className="pt-3 ">
+    <View>
       {/* Images */}
 
       {/*TODO: add scroll*/}
@@ -52,12 +54,34 @@ export default function SectionSelectedImages({ image, location, gallery }) {
         )}
       </View>
 
-      {/* Location */}
-      <View className="flex-row space-x-3 items-center pt-3 px-3">
-        <IconEntypo name="location-pin" size={30} color={primaryContrast} />
-        <Text className="text-primary-text font-semibold">
-          {location || "Paracas - Ica"}
-        </Text>
+      {/* footImage */}
+      <View className=" pt-3 px-6 space-y-1">
+        {/* location */}
+        <View className="flex-row space-x-3 items-center ">
+          <IconEntypo name="location-pin" size={20} color={primaryContrast} />
+          <Text className="text-primary-text font-semibold ">
+            {location || "Paracas - Ica"}
+          </Text>
+        </View>
+
+        {/* OpenTime */}
+        <View className="flex-row justify-between items-center ">
+          <View className="flex-row items-center space-x-3">
+            <IconFeather name="clock" size={20} color={primaryContrast} />
+            <Text className="text-primary-text font-semibold text-xs">
+              Open Today
+            </Text>
+          </View>
+          <View className="flex-row items-center space-x-1">
+            <IconFontAwesome name="tags" size={20} color={primaryContrast} />
+            <Text className="text-primary-contrast font-bold text-xs">
+              -58%
+            </Text>
+            <Text className="text-primary-text font-semibold text-xs">
+              (13 Days Left)
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   );

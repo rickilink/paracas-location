@@ -128,7 +128,7 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
+      {/*  <Tab.Screen
         name="MessagesTabScreen"
         component={MessagesScreen}
         options={{
@@ -139,7 +139,7 @@ function MyTabs() {
           ),
           tabBarBadge: 1,
         }}
-      />
+      /> */}
       <Tab.Screen
         name="SettingsTabScreen"
         component={SettingsScreen}
@@ -151,7 +151,7 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
+      {/*   <Tab.Screen
         name="ProfilesTabScreen"
         component={MyStackProfile}
         options={{
@@ -161,7 +161,7 @@ function MyTabs() {
             <IconAnt name="user" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

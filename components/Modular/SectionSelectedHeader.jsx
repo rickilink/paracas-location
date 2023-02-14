@@ -3,7 +3,7 @@ import React from "react";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
 import useTheme from "../../hooks/useTheme";
 
-export default function SectionSelectedHeader({ name, rating }) {
+export default function SectionSelectedHeader({ name, rating, type }) {
   const { primaryContrast } = useTheme();
 
   return (
@@ -16,7 +16,10 @@ export default function SectionSelectedHeader({ name, rating }) {
         <Text className="font-bold text-md text-primary-text">
           {rating || "4.9"}
         </Text>
-        <Text className="font-thin text-primary-text">100 reviews</Text>
+        <Text className="font-thin text-primary-text flex-1">100 reviews</Text>
+        <Text className="capitalize font-semibold text-primary-text">
+          {type || "type"}
+        </Text>
       </View>
     </View>
   );

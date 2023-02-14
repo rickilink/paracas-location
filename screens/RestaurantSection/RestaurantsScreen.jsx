@@ -18,7 +18,7 @@ export default function RestaurantScreen() {
   return (
     <View className="pt-8 px-6 bg-primary-background flex-1">
       <View>
-        <SectionHeader title="restaurant" />
+        <SectionHeader title="restaurant" Items={restaurants} />
         {/*TODO: Change Name */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <SectionHero filteredByDiscount={filteredRestaurants} />
