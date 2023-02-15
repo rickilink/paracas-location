@@ -12,11 +12,8 @@ export default function TopSections(props) {
 
   function handleRedirect(to) {
     const ItemDetails = to;
-    const linkToNavigate = `${to.type.charAt(0).toUpperCase()}${to.type.slice(
-      1
-    )}Selected`;
 
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
     /* switch (to.type) {

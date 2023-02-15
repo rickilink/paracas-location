@@ -13,11 +13,7 @@ export default function SectionHeroCard(props) {
   function handleRedirect() {
     const ItemDetails = props;
 
-    const linkToNavigate = `${props.type
-      .charAt(0)
-      .toUpperCase()}${props.type.slice(1)}Selected`;
-
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
     /* switch (props.type) {

@@ -8,11 +8,7 @@ export default function SectionCard(props) {
   const ItemDetails = props.item;
 
   const handleNavigation = () => {
-    const linkToNavigate = `${props.type
-      .charAt(0)
-      .toUpperCase()}${props.type.slice(1)}Selected`;
-
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
     /*switch (props.type) {

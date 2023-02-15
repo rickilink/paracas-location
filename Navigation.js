@@ -13,13 +13,10 @@ import SettingsScreen from "./screens/SettingsScreen";
 import MessagesScreen from "./screens/MessagesScreen";
 import { useSelector } from "react-redux";
 import HotelsScreen from "./screens/HotelSection/HotelsScreen";
-import HotelSelectedScreen from "./screens/HotelSection/HotelSelectedScreen";
 import RestaurantsScreen from "./screens/RestaurantSection/RestaurantsScreen";
-import RestaurantSelectedScreen from "./screens/RestaurantSection/RestaurantSelectedScreen";
 import ToursScreen from "./screens/ToursSection/ToursScreen";
-import TourSelectedScreen from "./screens/ToursSection/TourSelectedScreen";
 import MarketsScreen from "./screens/MarketSection/MarketsScreen";
-import MarketSelectedScreen from "./screens/MarketSection/MarketSelectedScreen";
+import SelectedScreen from "./screens/SelectedScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -56,24 +53,10 @@ function MyStackHome() {
           headerShown: false,
         }}
       />
-      <StackHomeScreen.Screen
-        name="HotelSelected"
-        component={HotelSelectedScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
 
       <StackHomeScreen.Screen
         name="Restaurants"
         component={RestaurantsScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <StackHomeScreen.Screen
-        name="RestaurantSelected"
-        component={RestaurantSelectedScreen}
         options={{
           headerShown: false,
         }}
@@ -86,13 +69,7 @@ function MyStackHome() {
           headerShown: false,
         }}
       />
-      <StackHomeScreen.Screen
-        name="TourSelected"
-        component={TourSelectedScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+
       <StackHomeScreen.Screen
         name="Markets"
         component={MarketsScreen}
@@ -100,9 +77,10 @@ function MyStackHome() {
           headerShown: false,
         }}
       />
+
       <StackHomeScreen.Screen
-        name="MarketSelected"
-        component={MarketSelectedScreen}
+        name="SelectedSection"
+        component={SelectedScreen}
         options={{
           headerShown: false,
         }}

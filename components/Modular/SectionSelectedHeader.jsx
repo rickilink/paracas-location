@@ -11,6 +11,7 @@ export default function SectionSelectedHeader({ name, rating, type }) {
       <Text className="text-3xl font-bold text-primary-text capitalize">
         {name || " selected name"}
       </Text>
+
       <View className="flex-row space-x-3 items-center pt-3">
         <IconAntDesign name="star" size={24} color={primaryContrast} />
         <Text className="font-bold text-md text-primary-text">
