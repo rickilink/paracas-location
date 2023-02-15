@@ -147,17 +147,27 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         <Text className="text-2xl font-bold text-primary-text">Filter by</Text>
       </View>
 
-      <View className="items-start flex-row space-x-2 flex-wrap space-y-2 gap-2">
-        {uniqueFeatures &&
-          uniqueFeatures.map((ft, i) => (
-            <TouchableOpacity onPress={() => handleAddFeature(ft)} key={i}>
-              {FeaturesToFilter.includes(ft) ? (
-                <Features name={ft} color={true} />
-              ) : (
-                <Features name={ft} />
-              )}
-            </TouchableOpacity>
-          ))}
+      <View className=" ">
+        {uniqueFeatures && (
+          <View>
+            <View className="py-3">
+              <Text className="font-bold text-primary-text text-xl capitalize">
+                features
+              </Text>
+            </View>
+            <View className="items-start  flex-row space-x-2 flex-wrap  space-y-2 gap-2">
+              {uniqueFeatures.map((ft, i) => (
+                <TouchableOpacity onPress={() => handleAddFeature(ft)} key={i}>
+                  {FeaturesToFilter.includes(ft) ? (
+                    <Features name={ft} color={true} />
+                  ) : (
+                    <Features name={ft} />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        )}
       </View>
     </View>
   );

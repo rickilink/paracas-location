@@ -86,9 +86,9 @@ export default function SectionFilterModal({ type, Items }) {
                   Items={Items}
                 />
               </View>
-              <View>
+              {/* <View>
                 <ModalFilterPrice />
-              </View>
+              </View> */}
             </View>
             <View className="absolute bottom-3 items-center justify-center w-screen px-6">
               <TouchableOpacity
