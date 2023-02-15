@@ -9,6 +9,7 @@ import searchReducer from "./slices/searchSlice.js";
 import tourReducer from "./slices/tourSlice.js";
 import marketReducer from "./slices/marketSlice.js";
 import transportReducer from "./slices/transportSlice.js";
+import exchangeReducer from "./slices/exchangeSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     tour: tourReducer,
     market: marketReducer,
     transport: transportReducer,
+    exchange: exchangeReducer,
   },
 });

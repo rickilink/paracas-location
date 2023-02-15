@@ -6,6 +6,7 @@ import { useRestaurantFilter } from "../../hooks/useRestaurant";
 import { useTourFilter } from "../../hooks/useTours";
 import { useMarketFilter } from "../../hooks/useMarkets";
 import { useTransportFilter } from "../../hooks/useTransport";
+import { useExchangeFilter } from "../../hooks/useExchange";
 
 export default function SectionCardWrapper({ Items, type }) {
   let FilteredItems = [];
@@ -27,6 +28,9 @@ export default function SectionCardWrapper({ Items, type }) {
       break;
     case "transport":
       FilteredItems = useTransportFilter();
+      break;
+    case "exchange":
+      FilteredItems = useExchangeFilter();
       break;
 
     default:

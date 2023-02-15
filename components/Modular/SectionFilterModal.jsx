@@ -11,6 +11,7 @@ import { useRestaurantFilterByFilteredFeatures } from "../../hooks/useRestaurant
 import { useTourFilterByFilteredFeatures } from "../../hooks/useTours";
 import { useMarketFilterByFilteredFeatures } from "../../hooks/useMarkets";
 import { useTransportFilterByFilteredFeatures } from "../../hooks/useTransport";
+import { useExchangeFilterByFilteredFeatures } from "../../hooks/useExchange";
 
 export default function SectionFilterModal({ type, Items }) {
   let filter = [];
@@ -32,6 +33,9 @@ export default function SectionFilterModal({ type, Items }) {
       break;
     case "transport":
       filter = useTransportFilterByFilteredFeatures();
+      break;
+    case "exchange":
+      filter = useExchangeFilterByFilteredFeatures();
       break;
     default:
       console.warn("UNknow sectionFilterModal 25");

@@ -19,6 +19,10 @@ import {
   setMarketFeaturesToFilter,
   setMarketFilter,
 } from "../../redux/slices/marketSlice";
+import {
+  setExchangeFeaturesToFilter,
+  setExchangeFilter,
+} from "../../redux/slices/exchangeSlice";
 
 export default function ModalFilterByFeature({ type, filter, Items }) {
   let FeaturesToFilter = filter;
@@ -122,6 +126,20 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
           );
         }
         dispatch(setTransportFilter());
+
+        break;
+
+      case "exchange": // Case Restaurant
+        if (FeaturesToFilter.includes(feature)) {
+          dispatch(
+            setExchangeFeaturesToFilter(
+              FeaturesToFilter.filter((f) => f !== feature)
+            )
+          );
+        } else {
+          dispatch(setExchangeFeaturesToFilter([...FeaturesToFilter, feature]));
+        }
+        dispatch(setExchangeFilter());
 
         break;
       default:
