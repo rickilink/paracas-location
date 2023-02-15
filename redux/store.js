@@ -8,6 +8,7 @@ import restaurantReducer from "./slices/restaurantSlice.js";
 import searchReducer from "./slices/searchSlice.js";
 import tourReducer from "./slices/tourSlice.js";
 import marketReducer from "./slices/marketSlice.js";
+import transportReducer from "./slices/transportSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     search: searchReducer,
     tour: tourReducer,
     market: marketReducer,
+    transport: transportReducer,
   },
 });

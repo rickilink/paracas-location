@@ -13,12 +13,19 @@ export default function Header({
   currentUser,
   tours,
   markets,
+  transports,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { primaryContrast } = useSelector((state) => state.theme.colors);
   const navigation = useNavigation();
-  const arrayOfAll = [...hotels, ...restaurants, ...tours, ...markets];
+  const arrayOfAll = [
+    ...hotels,
+    ...restaurants,
+    ...tours,
+    ...markets,
+    ...transports,
+  ];
 
   const foundItemsByName = (nameToMatch) =>
     arrayOfAll.filter((item) =>

@@ -11,6 +11,14 @@ import {
   setTourFeaturesToFilter,
   setTourFilter,
 } from "../../redux/slices/tourSlice";
+import {
+  setTransportFeaturesToFilter,
+  setTransportFilter,
+} from "../../redux/slices/transportSlice";
+import {
+  setMarketFeaturesToFilter,
+  setMarketFilter,
+} from "../../redux/slices/marketSlice";
 
 export default function ModalFilterByFeature({ type, filter, Items }) {
   let FeaturesToFilter = filter;
@@ -86,6 +94,34 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
           dispatch(setTourFeaturesToFilter([...FeaturesToFilter, feature]));
         }
         dispatch(setTourFilter());
+
+        break;
+      case "market": // Case Restaurant
+        if (FeaturesToFilter.includes(feature)) {
+          dispatch(
+            setMarketFeaturesToFilter(
+              FeaturesToFilter.filter((f) => f !== feature)
+            )
+          );
+        } else {
+          dispatch(setMarketFeaturesToFilter([...FeaturesToFilter, feature]));
+        }
+        dispatch(setMarketFilter());
+
+        break;
+      case "transport": // Case Restaurant
+        if (FeaturesToFilter.includes(feature)) {
+          dispatch(
+            setTransportFeaturesToFilter(
+              FeaturesToFilter.filter((f) => f !== feature)
+            )
+          );
+        } else {
+          dispatch(
+            setTransportFeaturesToFilter([...FeaturesToFilter, feature])
+          );
+        }
+        dispatch(setTransportFilter());
 
         break;
       default:

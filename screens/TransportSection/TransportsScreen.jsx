@@ -5,23 +5,24 @@ import SectionHeader from "../../components/Modular/SectionHeader";
 import SectionHero from "../../components/Modular/SectionHero";
 import SectionPopularStays from "../../components/Modular/SectionPopularStays";
 
-import { useMarkets } from "../../hooks/useMarkets";
-import { filterMarketsByDiscount } from "../../redux/slices/marketSlice";
+import { filterToursByDiscount } from "../../redux/slices/tourSlice";
+import { useTransports } from "../../hooks/useTransport";
+import { filterTransportByDiscount } from "../../redux/slices/transportSlice";
 
 // query import { collection, query, where, getDocs } from "firebase/firestore";
 
-export default function MarketsScreen() {
-  const markets = useMarkets(); //TODO: change Name
-  const filteredTours = filterMarketsByDiscount(markets); //TODO: change Name
+export default function TransportsScreen() {
+  const transports = useTransports(); //TODO: change Name
+  const filteredTransports = filterTransportByDiscount(transports); //TODO: change Name
 
   return (
     <View className="pt-8 px-6 bg-primary-background flex-1">
       <View>
-        <SectionHeader title="markets" Items={markets} />
+        <SectionHeader title="transport" Items={transports} />
         {/*TODO: Change Name */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SectionHero filteredByDiscount={filteredTours} />
-          <SectionPopularStays type="market" Items={markets} />
+          <SectionHero filteredByDiscount={filteredTransports} />
+          <SectionPopularStays type="transport" Items={transports} />
         </ScrollView>
       </View>
     </View>

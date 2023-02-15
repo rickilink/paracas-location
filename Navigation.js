@@ -17,6 +17,7 @@ import RestaurantsScreen from "./screens/RestaurantSection/RestaurantsScreen";
 import ToursScreen from "./screens/ToursSection/ToursScreen";
 import MarketsScreen from "./screens/MarketSection/MarketsScreen";
 import SelectedScreen from "./screens/SelectedScreen";
+import TransportsScreen from "./screens/TransportSection/TransportsScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -73,6 +74,13 @@ function MyStackHome() {
       <StackHomeScreen.Screen
         name="Markets"
         component={MarketsScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <StackHomeScreen.Screen
+        name="Transports"
+        component={TransportsScreen}
         options={{
           headerShown: false,
         }}

@@ -11,6 +11,7 @@ import { fetchUsers, useUsers } from "../hooks/useUsers.js";
 import TopNavigationButton from "../components/HomeScreen/TopNavigationButton.jsx";
 import { fetchTours, useTours } from "../hooks/useTours.js";
 import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
+import { fetchTransports, useTransports } from "../hooks/useTransport.js";
 
 export default function HomeScreen() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
@@ -19,7 +20,7 @@ export default function HomeScreen() {
     { title: "Restaurants", navigationUrl: "Restaurants" },
     { title: "Tours", navigationUrl: "Tours" },
     { title: "Markets", navigationUrl: "Markets" },
-    { title: "Taxis" },
+    { title: "Transports", navigationUrl: "Transports" },
     { title: "Exchange" },
     { title: "Services" },
   ];
@@ -29,6 +30,8 @@ export default function HomeScreen() {
   let tours = useTours();
 
   let markets = useMarkets();
+
+  let transports = useTransports();
 
   let hotels = useHotels();
   const topPlacesHotels = hotels?.filter((hot) => hot.topPlace);
@@ -61,6 +64,9 @@ export default function HomeScreen() {
   if (markets.length <= 0) {
     fetchMarkets();
   }
+  if (transports.length <= 0) {
+    fetchTransports();
+  }
 
   return (
     <SafeAreaView className="bg-primary-background">
@@ -72,6 +78,7 @@ export default function HomeScreen() {
           currentUser={users[0]}
           tours={tours}
           markets={markets}
+          transports={transports}
         />
         <View className="pb-32">
           <ImageSection hotels={hotels} />

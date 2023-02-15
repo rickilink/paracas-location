@@ -10,6 +10,7 @@ import { useFilterByFilteredFeatures } from "../../hooks/useHotels";
 import { useRestaurantFilterByFilteredFeatures } from "../../hooks/useRestaurant";
 import { useTourFilterByFilteredFeatures } from "../../hooks/useTours";
 import { useMarketFilterByFilteredFeatures } from "../../hooks/useMarkets";
+import { useTransportFilterByFilteredFeatures } from "../../hooks/useTransport";
 
 export default function SectionFilterModal({ type, Items }) {
   let filter = [];
@@ -28,6 +29,9 @@ export default function SectionFilterModal({ type, Items }) {
       break;
     case "market":
       filter = useMarketFilterByFilteredFeatures();
+      break;
+    case "transport":
+      filter = useTransportFilterByFilteredFeatures();
       break;
     default:
       console.warn("UNknow sectionFilterModal 25");
