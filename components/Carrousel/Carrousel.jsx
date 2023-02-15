@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import Animated, {
   Extrapolate,
   interpolate,
@@ -11,7 +11,7 @@ import useTheme from "../../hooks/useTheme.js";
 
 import { window } from "./constants";
 
-function CarrouselComponent({ images, autoplayInterval }) {
+function CarrouselComponent({ images, autoplayInterval, handleScroll }) {
   const { primaryContrast, secondaryBackground } = useTheme();
   const PAGE_WIDTH = window.width;
   const colors = [
@@ -70,6 +70,7 @@ function CarrouselComponent({ images, autoplayInterval }) {
         renderItem={({ item, index }) => (
           <Image source={{ uri: item }} key={index} style={styles.image} />
         )}
+        onScroll={handleScroll}
       />
       {!!progressValue && (
         <View

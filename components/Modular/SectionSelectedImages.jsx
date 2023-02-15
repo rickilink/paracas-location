@@ -1,28 +1,23 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
-import React, { useCallback, useState } from "react";
+import { View, Text, Image, Dimensions } from "react-native";
+import React, { useCallback, useRef, useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import IconFeather from "react-native-vector-icons/Feather";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import useTheme from "../../hooks/useTheme";
 import CarrouselComponent from "../Carrousel/Carrousel";
 
-export default function SectionSelectedImages({ image, location, gallery }) {
+export default function SectionSelectedImages({
+  image,
+  location,
+  gallery,
+  handleScroll,
+}) {
   const { primaryContrast } = useTheme();
 
   const width = Dimensions.get("window").width;
 
   return (
     <View>
-      {/* Images */}
-
-      {/*TODO: add scroll*/}
       {!gallery && (
         <Image
           source={{
@@ -33,24 +28,12 @@ export default function SectionSelectedImages({ image, location, gallery }) {
       )}
 
       <View className="flex-row space-x-3  ">
-        {/* {gallery &&
-            gallery.map((pic, i) => (
-              <View key={i}>
-                <Image
-                  source={{
-                    uri: pic,
-                  }}
-                  className="relative w-[500px] h-[300px] bg-secondary-background rounded-md  object-contain "
-                />
-                <View className="absolute  bottom-0  mb-5 ml-5 w-12 h-12 rounded-br-3xl rounded-tl-3xl bg-primary-contrast opacity-80 items-center justify-center"></View>
-                <Text className="text-button-text font-bold absolute  bottom-0  mb-1 ml-8 w-12 h-12 ">{`${
-                  i + 1
-                } / ${gallery.length}`}</Text>
-              </View>
-            ))} */}
-
         {gallery && (
-          <CarrouselComponent images={gallery} autoplayInterval={3000} />
+          <CarrouselComponent
+            images={gallery}
+            autoplayInterval={1500}
+            handleScroll={handleScroll}
+          />
         )}
       </View>
 
