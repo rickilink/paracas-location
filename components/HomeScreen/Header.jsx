@@ -15,6 +15,7 @@ export default function Header({
   markets,
   transports,
   exchanges,
+  services,
 }) {
   const [expanded, setExpanded] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -27,6 +28,7 @@ export default function Header({
     ...markets,
     ...transports,
     ...exchanges,
+    ...services,
   ];
 
   const foundItemsByName = (nameToMatch) =>

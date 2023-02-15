@@ -17,23 +17,6 @@ export default function ProfileSectionLastVisited({ currentUser }) {
     navigation.navigate("SelectedSection", {
       ItemDetails,
     });
-    /* switch (prop.type) {
-      case "hotel":
-        navigation.navigate("HotelSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "restaurant":
-        navigation.navigate("RestaurantSelected", {
-          ItemDetails,
-        });
-        break;
-      default:
-        console.warn("UNknow SectionCard 23");
-
-        break;
-    } */
   };
 
   return (

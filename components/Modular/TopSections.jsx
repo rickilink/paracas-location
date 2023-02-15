@@ -16,29 +16,6 @@ export default function TopSections(props) {
     navigation.navigate("SelectedSection", {
       ItemDetails,
     });
-    /* switch (to.type) {
-      case "hotel":
-        navigation.navigate("HotelSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "restaurant":
-        navigation.navigate("RestaurantSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "tour":
-        navigation.navigate("TourSelected", {
-          ItemDetails,
-        });
-
-        break;
-      default:
-        console.warn("Header in HOmeScreen line 67");
-        break;
-    } */
   }
 
   switch (props.type) {

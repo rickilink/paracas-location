@@ -16,29 +16,6 @@ export default function SectionHeroCard(props) {
     navigation.navigate("SelectedSection", {
       ItemDetails,
     });
-    /* switch (props.type) {
-      case "hotel":
-        navigation.navigate("HotelSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "restaurant":
-        navigation.navigate("RestaurantSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "tour":
-        navigation.navigate("TourSelected", {
-          ItemDetails,
-        });
-
-        break;
-      default:
-        console.warn("Header in HOmeScreen line 67");
-        break;
-    } */
   }
 
   return (
@@ -78,24 +55,12 @@ export default function SectionHeroCard(props) {
 
         {/* Features */}
         <View className=" absolute bottom-0  p-3 left-0 items-center flex-row flex-wrap space-x-2 gap-2 ">
-          <View>
-            <Features name="Wi-FI" />
-          </View>
-          <View>
-            <Features name="Open Pool" />
-          </View>
-          <View>
-            <Features name="from $40" />
-          </View>
-          <View>
-            <Features name="Breakfast" />
-          </View>
-          <View>
-            <Features name="Bar" />
-          </View>
-          <View>
-            <Features name="Restaurant" />
-          </View>
+          {props.features.length > 0 &&
+            props.features.map((ft, index) => (
+              <View key={index}>
+                <Features name={ft} />
+              </View>
+            ))}
         </View>
       </View>
     </TouchableOpacity>

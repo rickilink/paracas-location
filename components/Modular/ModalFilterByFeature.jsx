@@ -23,6 +23,10 @@ import {
   setExchangeFeaturesToFilter,
   setExchangeFilter,
 } from "../../redux/slices/exchangeSlice";
+import {
+  setServiceFeaturesToFilter,
+  setServiceFilter,
+} from "../../redux/slices/serviceSlice";
 
 export default function ModalFilterByFeature({ type, filter, Items }) {
   let FeaturesToFilter = filter;
@@ -30,31 +34,6 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
     (features, item) => [...features, ...item.features],
     []
   ); //get all features in all items
-
-  /* switch (type) {
-    case "hotel":
-      allFeatures = Items?.reduce(
-        (features, item) => [...features, ...item.features],
-        []
-      );
-
-      break;
-    case "restaurant":
-      allFeatures = Items?.reduce(
-        (features, item) => [...features, ...item.features],
-        []
-      );
-      break;
-    case "tour":
-      allFeatures = Items?.reduce(
-        (features, item) => [...features, ...item.features],
-        []
-      );
-      break;
-    default:
-      console.warn("UNknow modalfilterByFeature 30");
-      break;
-  } */
 
   const dispatch = useDispatch();
   const uniqueFeatures = [...new Set(allFeatures)];
@@ -140,6 +119,19 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
           dispatch(setExchangeFeaturesToFilter([...FeaturesToFilter, feature]));
         }
         dispatch(setExchangeFilter());
+
+        break;
+      case "service": // Case Restaurant
+        if (FeaturesToFilter.includes(feature)) {
+          dispatch(
+            setServiceFeaturesToFilter(
+              FeaturesToFilter.filter((f) => f !== feature)
+            )
+          );
+        } else {
+          dispatch(setServiceFeaturesToFilter([...FeaturesToFilter, feature]));
+        }
+        dispatch(setServiceFilter());
 
         break;
       default:

@@ -19,6 +19,7 @@ import MarketsScreen from "./screens/MarketSection/MarketsScreen";
 import SelectedScreen from "./screens/SelectedScreen";
 import TransportsScreen from "./screens/TransportSection/TransportsScreen";
 import ExchangesScreen from "./screens/ExchangeScreen/ExchangesScreen";
+import ServicesScreen from "./screens/ServiceScreen/ServicesScreen";
 
 const Tab = createBottomTabNavigator();
 const StackHomeScreen = createNativeStackNavigator();
@@ -93,7 +94,13 @@ function MyStackHome() {
           headerShown: false,
         }}
       />
-
+      <StackHomeScreen.Screen
+        name="Services"
+        component={ServicesScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
       <StackHomeScreen.Screen
         name="SelectedSection"
         component={SelectedScreen}
