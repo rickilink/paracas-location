@@ -37,12 +37,9 @@ export default function Header({
   }
 
   function handleNavigation(props) {
-    const linkToNavigate = `${props.type
-      .charAt(0)
-      .toUpperCase()}${props.type.slice(1)}Selected`;
     const ItemDetails = props;
 
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
   }

@@ -13,11 +13,8 @@ export default function ProfileSectionLastVisited({ currentUser }) {
 
   const handleNavigation = (prop) => {
     const ItemDetails = prop;
-    const linkToNavigate = `${prop.type
-      .charAt(0)
-      .toUpperCase()}${prop.type.slice(1)}Selected`;
 
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
     /* switch (prop.type) {

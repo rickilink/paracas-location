@@ -15,12 +15,9 @@ export default function ImageSection({ hotels }) {
   const Sponsors = hotels?.filter((ht) => ht.isSponsor);
 
   function handleRedirect(to) {
-    const linkToNavigate = `${to.type.charAt(0).toUpperCase()}${to.type.slice(
-      1
-    )}Selected`;
     const ItemDetails = to;
 
-    navigation.navigate(linkToNavigate, {
+    navigation.navigate("SelectedSection", {
       ItemDetails,
     });
 

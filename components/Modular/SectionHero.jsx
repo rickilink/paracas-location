@@ -7,9 +7,12 @@ export default function SectionHero({ filteredByDiscount }) {
   return (
     <View>
       <View className="flex-row space-x-3">
-        <TouchableOpacity>
-          <Text className="text-xl">Discounts</Text>
-        </TouchableOpacity>
+        {filteredByDiscount.length > 0 && (
+          <TouchableOpacity>
+            <Text className="text-xl">Discounts</Text>
+          </TouchableOpacity>
+        )}
+
         {/*  <TouchableOpacity>
           <Text className="text-xl">Executed</Text>
         </TouchableOpacity>

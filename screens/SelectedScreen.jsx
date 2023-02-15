@@ -1,10 +1,10 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import SectionSelectedHeader from "../components/Modular/SectionHeader";
+import SectionSelectedHeader from "../components/Modular/SectionSelectedHeader";
 import SectionSelectedImages from "../components/Modular/SectionSelectedImages";
 import SectionSelectedFeatures from "../components/Modular/SectionSelectedFeatures";
-import SectionSelectedAbout from "..components/Modular/SectionSelectedAbout";
+import SectionSelectedAbout from "../components/Modular/SectionSelectedAbout";
 import HotelBookModal from "../components/Hotels/HotelBookModal";
 import SectionSelectedOpeningHours from "../components/Modular/SectionSelectedOpeningHours";
 import SectionSelectedReviews from "../components/Modular/SectionSelectedReviews";
@@ -21,7 +21,7 @@ export default function SelectedScreen() {
           <View className=" px-6">
             <SectionSelectedHeader
               name={ItemDetails.name || "name"}
-              rating={ItemDetails.rating || "rating"}
+              rating={ItemDetails.rating}
               type={ItemDetails.type || "type"}
             />
           </View>

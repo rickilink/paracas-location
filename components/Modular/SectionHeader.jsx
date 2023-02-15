@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function HotelsHeader({ title }) {
+export default function SectionHeader({ title }) {
   return (
     <View className="pt-3">
       <View className="flex-row justify-between items-center">
