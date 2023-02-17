@@ -39,6 +39,9 @@ export default function LogInScreen() {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  const removeSpaces = (text) => {
+    return text.replace(/\s/g, "");
+  };
   const isAllFieldsFilled = emailRegex.test(email) && password.length > 5;
   /* const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     expoClientId: CLIENT_ID,
@@ -100,16 +103,20 @@ export default function LogInScreen() {
       getDoc(userRef)
         .then((doc) => {
           if (doc.exists()) {
+            /* console.log(doc.data()); */
             const userData = doc.data();
+            const currentUser = userData;
             dispatch(
               setCurrentUser({
+                favorite: userData.favorite || null,
                 name: userData.name,
+                uid: userData.uid,
                 email: userData.email,
                 photoURL: userData.photoURL,
-                ...userData,
+                visited: userData.visited || null,
               })
             );
-            navigation.navigate("Home");
+            navigation.navigate("Home", { currentUser });
             // display user information in your app
           } else {
             console.log("No user data found");
@@ -121,6 +128,16 @@ export default function LogInScreen() {
     } else {
       console.log("User is not logged in");
       // clear user information from your app
+      dispatch(
+        setCurrentUser({
+          favorite: null,
+          name: null,
+          uid: null,
+          email: null,
+          photoURL: null,
+          visited: null,
+        })
+      );
     }
   });
 
@@ -130,7 +147,8 @@ export default function LogInScreen() {
         console.log("User logged in successfully");
       })
       .catch((error) => {
-        console.log("Error logging in:", error);
+        console.warn("Error logging in:", error);
+        Alert.alert("Error logging in", "Try again ");
       });
   };
 
@@ -153,7 +171,7 @@ export default function LogInScreen() {
           <TextInput
             placeholder="Email"
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(text) => setEmail(removeSpaces(text))}
             className={
               !emailRegex.test(email) && email.length != 0
                 ? "bg-white w-full px-3 rounded-md h-[60px] text-primary-danger border-primary-danger border-2"

@@ -6,8 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileSectionLastVisited({ currentUser }) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const VisitedArrayFirst2 =
-    currentUser.Visited && currentUser.Visited.slice(0, 2);
+  const visitedArrayFirst2 =
+    currentUser.visited && currentUser.visited.slice(0, 2);
 
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ export default function ProfileSectionLastVisited({ currentUser }) {
       <View>
         <View className="flex-row items-center justify-between px-6">
           <Text className="text-primary-text text-xl font-semibold capitalize">
-            Last Visited
+            Last visited
           </Text>
           <TouchableOpacity>
             <Text className="text-primary-contrast font-semibold italic text-lg">
@@ -35,10 +35,10 @@ export default function ProfileSectionLastVisited({ currentUser }) {
       </View>
       {/* Body Section */}
 
-      {currentUser?.Visited.length > 0 && (
+      {currentUser?.visited.length > 0 && (
         <View className="mt-3 px-3 space-y-3 ">
           <View className="flex-row h-[268px] justify-between">
-            {VisitedArrayFirst2.map((visited, index) => (
+            {visitedArrayFirst2.map((visited, index) => (
               <TouchableOpacity
                 onPress={() => handleNavigation(visited)}
                 key={index}

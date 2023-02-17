@@ -1,0 +1,52 @@
+{
+    "_automaticDataCollectionEnabled": false,
+    "_config": {
+        "automaticDataCollectionEnabled": false,
+        "name": "[DEFAULT]"
+    },
+    "_container": {
+        "name": "[DEFAULT]",
+        "providers": Map {
+            "platform-logger" => [Provider
+            ],
+            "heartbeat" => [Provider
+            ],
+            "fire-core-version" => [Provider
+            ],
+            "fire-core-esm2017-version" => [Provider
+            ],
+            "fire-js-version" => [Provider
+            ],
+            "auth" => [Provider
+            ],
+            "auth-internal" => [Provider
+            ],
+            "fire-auth-rn-version" => [Provider
+            ],
+            "fire-auth-cjs5-version" => [Provider
+            ],
+            "fire-js-all-app-version" => [Provider
+            ],
+            "firestore" => [Provider
+            ],
+            "fire-fst-rn-version" => [Provider
+            ],
+            "fire-fst-esm2017-version" => [Provider
+            ],
+            "app" => [Provider
+            ],
+            "app-check-internal" => [Provider
+            ]
+        }
+    },
+    "_isDeleted": false,
+    "_name": "[DEFAULT]",
+    "_options": {
+        "apiKey": "AIzaSyCqXC42tnmihMFnMItmPwzobcpUZ0JlmDg",
+        "appId": "1:639231404914:web:57ac52bcc2f196454a4beb",
+        "authDomain": "paracas-location.firebaseapp.com",
+        "messagingSenderId": "639231404914",
+        "projectId": "paracas-location",
+        "storageBucket": "paracas-location.appspot.com"
+    }
+}

@@ -14,6 +14,7 @@ import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
 import { fetchTransports, useTransports } from "../hooks/useTransport.js";
 import { fetchExchanges, useExchanges } from "../hooks/useExchange.js";
 import { fetchServices, useServices } from "../hooks/useService.js";
+import { useRoute } from "@react-navigation/native";
 
 export default function HomeScreen() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
@@ -27,7 +28,9 @@ export default function HomeScreen() {
     { title: "Services", navigationUrl: "Services" },
   ];
 
-  let currentUser = useCurrentUser();
+  const {
+    params: { currentUser },
+  } = useRoute();
 
   let tours = useTours();
 

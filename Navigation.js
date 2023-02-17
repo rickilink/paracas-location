@@ -26,7 +26,7 @@ const StackHomeScreen = createNativeStackNavigator();
 
 function MyStackHome() {
   return (
-    <StackHomeScreen.Navigator initialRouteName="Home">
+    <StackHomeScreen.Navigator initialRouteName="Login">
       <StackHomeScreen.Screen
         name="Home"
         component={HomeScreen}

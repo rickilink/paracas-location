@@ -12,13 +12,13 @@ export default function ProfileSections({ currentUser }) {
   }
   return (
     <View className="space-y-3">
-      {currentUser.Visited && (
+      {currentUser.visited.length > 0 && (
         <View>
           <ProfileSectionLastVisited currentUser={currentUser} />
         </View>
       )}
 
-      {currentUser.favorites && (
+      {currentUser.favorite.length > 0 && (
         <View className="pt-3">
           <ProfileSectionMyFavorite currentUser={currentUser} />
         </View>

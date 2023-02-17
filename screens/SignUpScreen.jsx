@@ -47,7 +47,10 @@ export default function SignUpScreen() {
         const userRef = doc(db, "Users", uid);
         setDoc(userRef, {
           email,
+          uid,
+          visited: [],
           name: `${name} ${lastName}`,
+          favorite: [],
           photoURL:
             "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
           // add other information here as needed
@@ -58,12 +61,27 @@ export default function SignUpScreen() {
               setCurrentUser({
                 name,
                 email,
+                uid,
                 phoneNumber: null,
+                favorite: [],
+                visited: [],
                 photoURL:
                   "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
               })
             );
-            navigation.navigate("Home");
+            navigation.navigate(
+              "Home",
+              currentUser({
+                name,
+                email,
+                uid,
+                phoneNumber: null,
+                favorite: [],
+                visited: [],
+                photoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
+              })
+            );
           })
           .catch((error) => {
             console.error("Error creating user document:", error);

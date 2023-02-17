@@ -6,8 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileSectionMyFavorite({ currentUser }) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const favoritesArrayFirst2 =
-    currentUser.favorites && currentUser.favorites.slice(0, 2);
+  const favoriteArrayFirst2 =
+    currentUser.favorite && currentUser.favorite.slice(0, 2);
 
   const navigation = useNavigation();
 
@@ -24,7 +24,7 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
       <View>
         <View className="flex-row items-center justify-between px-6">
           <Text className="text-primary-text text-xl font-semibold capitalize">
-            My favorites
+            My favorite
           </Text>
           <TouchableOpacity>
             <Text className="text-primary-contrast font-semibold italic text-lg">
@@ -35,10 +35,10 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
       </View>
       {/* Body Section */}
 
-      {currentUser?.favorites.length > 0 && (
+      {currentUser?.favorite.length > 0 && (
         <View className="mt-3 px-3 space-y-3 ">
           <View className="flex-row h-[268px] justify-between">
-            {favoritesArrayFirst2.map((fav, index) => (
+            {favoriteArrayFirst2.map((fav, index) => (
               <TouchableOpacity
                 onPress={() => handleNavigation(fav)}
                 key={index}
