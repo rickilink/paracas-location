@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "location-paracas",
-    "slug": "location-paracas",
+    "name": "paracas-location",
+    "scheme": "paracas-location",
+    "slug": "paracas-location",
     "version": "0.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,9 +31,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "owner": "rickilink",
     "extra": {
       "eas": {
-        "projectId": "82cc1bd7-6bf1-4f46-820e-6b519da769d0"
+        "projectId": "d5724792-bdb8-49e2-8840-84a283ccd6c0"
       }
     }
   }

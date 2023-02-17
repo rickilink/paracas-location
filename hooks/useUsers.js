@@ -20,11 +20,11 @@ export const fetchUsers = async () => {
   //
 };
 
-function useUsers() {
-  return useSelector((state) => state.user.users);
+function useCurrentUser() {
+  return useSelector((state) => state.auth.currentUser);
 }
 function useUsersFilter() {
   return useSelector((state) => state.user.filter);
 }
 
-export { useUsers, useUsersFilter };
+export { useCurrentUser, useUsersFilter };

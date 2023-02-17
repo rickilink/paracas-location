@@ -6,9 +6,76 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import IconButton from "react-native-vector-icons/Entypo";
 import { WideButton } from "../components/WideButton";
+import { useState } from "react";
+import { app } from "../firebase.config";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { db } from "../firebase.config";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function SignUpScreen() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigation = useNavigation();
+
+  const handleInput1Change = (text) => {
+    setName(text);
+    checkInputs();
+  };
+
+  const handleInput2Change = (text) => {
+    setLastName(text);
+    checkInputs();
+  };
+
+  const handleInput3Change = (text) => {
+    setEmail(text);
+    checkInputs();
+  };
+  const handleInput4Change = (text) => {
+    setPassword(text);
+    checkInputs();
+  };
+
+  const checkInputs = () => {
+    if (name && lastName && emailRegex.test(email) && password.length > 5) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  };
+  const handleSignUp = () => {
+    const auth = getAuth(app);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const { uid, email } = user;
+
+        // Create a new document for the user in Firestore
+        const userRef = doc(db, "Users", uid);
+        setDoc(userRef, {
+          email,
+          name: `${name} ${lastName}`,
+          photoURL:
+            "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
+          // add other information here as needed
+        })
+          .then(() => {
+            console.log("User document created successfully");
+            navigation.navigate("Home");
+          })
+          .catch((error) => {
+            console.error("Error creating user document:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error signing up:", error);
+      });
+  };
+
   return (
     <View className=" mt-10 flex-1 bg-primary-background">
       <View className="mt-3 mx-5 flex-1 rounded-md ">
@@ -29,22 +96,33 @@ export default function SignUpScreen() {
         <View className="space-y-6 mt-12">
           <View className="flex-row  justify-between ">
             <TextInput
+              placeholder="Name"
+              value={name}
+              onChangeText={handleInput1Change}
               className="bg-white w-[49%] px-3 rounded-md h-[60px] text-primary-text"
-              placeholder="name"
             ></TextInput>
             <TextInput
+              placeholder="Last Name"
+              value={lastName}
+              onChangeText={handleInput2Change}
               className="bg-white w-[49%] px-3 rounded-md h-[60px] text-primary-text"
-              placeholder="last name"
             ></TextInput>
           </View>
           <TextInput
+            placeholder="Email"
+            value={email}
+            keyboardType="email-address"
+            onChangeText={handleInput3Change}
             className="bg-white w-full px-3 rounded-md h-[60px] text-primary-text"
-            placeholder="email"
           ></TextInput>
           <View className="flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between">
             <TextInput
+              value={password}
+              onChangeText={handleInput4Change}
+              secureTextEntry
               className=" text-primary-text flex-1  h-full"
-              placeholder="password"
+              placeholder="Password"
+              minLength={6}
             ></TextInput>
             <TouchableOpacity>
               <IconButton name="eye-with-line" color="#1BC4B9" size={25} />
@@ -55,7 +133,17 @@ export default function SignUpScreen() {
         {/* Button */}
 
         <View className="mt-12">
-          <WideButton title="Sign Up" navigate="Home" />
+          <TouchableOpacity
+            disabled={isDisabled}
+            onPress={handleSignUp}
+            className={
+              !isDisabled
+                ? "w-full h-[70px] bg-primary-contrast rounded-md items-center justify-center"
+                : "w-full h-[70px] bg-secondary-background rounded-md items-center justify-center"
+            }
+          >
+            <Text className="text-button-text font-bold text-xl">Sign Up</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Or Log with google */}

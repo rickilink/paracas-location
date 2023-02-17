@@ -74,21 +74,29 @@ export default function Header({
           </View>
         ) : (
           <View className=" flex-row justify-between flex-1 items-center ">
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("Profile", {
-                  currentUser,
-                })
-              }
-              className="h-12 w-12 bg-gray-300 rounded-full items-center justify-center"
-            >
-              <Image
-                source={{
-                  uri: currentUser?.photoURL,
-                }}
-                className="w-12 h-12 rounded-full"
-              />
-            </TouchableOpacity>
+            {currentUser.photoURL ? (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Profile", {
+                    currentUser,
+                  })
+                }
+                className="h-12 w-12 bg-gray-300 rounded-full items-center justify-center"
+              >
+                <Image
+                  source={{
+                    uri: currentUser?.photoURL,
+                  }}
+                  className="w-12 h-12 rounded-full"
+                />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text className="text-primary-contrast font-extrabold text-lg italic">
+                  Log In
+                </Text>
+              </TouchableOpacity>
+            )}
 
             <Image
               source={require("../../assets/locations-flat.png")}

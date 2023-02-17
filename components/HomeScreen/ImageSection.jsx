@@ -6,13 +6,13 @@ import { getSponsorHotel } from "../../redux/slices/hotelSlice";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function ImageSection({ hotels }) {
+export default function ImageSection({ items }) {
   const navigation = useNavigation();
   const { primaryContrast, buttonText } = useSelector(
     (state) => state.theme.colors
   );
   const dispatch = useDispatch();
-  const Sponsors = hotels?.filter((ht) => ht.isSponsor);
+  const Sponsors = items?.filter((ht) => ht.isSponsor);
 
   function handleRedirect(to) {
     const ItemDetails = to;
@@ -20,27 +20,6 @@ export default function ImageSection({ hotels }) {
     navigation.navigate("SelectedSection", {
       ItemDetails,
     });
-
-    /*   switch (to.type) {
-      
-
-        break;
-      case "restaurant":
-        navigation.navigate("RestaurantSelected", {
-          ItemDetails,
-        });
-
-        break;
-      case "tour":
-        navigation.navigate("TourSelected", {
-          ItemDetails,
-        });
-
-        break;
-      default:
-        console.warn("Header in HOmeScreen line 67");
-        break;
-    } */
   }
 
   return (

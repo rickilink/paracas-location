@@ -7,7 +7,7 @@ import Sections from "../components/Modular/Sections.jsx";
 import { useSelector } from "react-redux";
 import { fetchHotels, useHotels } from "../hooks/useHotels.js";
 import { fetchRestaurants, useRestaurants } from "../hooks/useRestaurant.js";
-import { fetchUsers, useUsers } from "../hooks/useUsers.js";
+import { fetchUsers, useCurrentUser, useUsers } from "../hooks/useUsers.js";
 import TopNavigationButton from "../components/HomeScreen/TopNavigationButton.jsx";
 import { fetchTours, useTours } from "../hooks/useTours.js";
 import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
@@ -27,7 +27,7 @@ export default function HomeScreen() {
     { title: "Services", navigationUrl: "Services" },
   ];
 
-  let users = useUsers();
+  let currentUser = useCurrentUser();
 
   let tours = useTours();
 
@@ -40,18 +40,21 @@ export default function HomeScreen() {
   let services = useServices();
 
   let hotels = useHotels();
-  const topPlacesHotels = hotels?.filter((hot) => hot.topPlace);
-  const topReservedHotels = hotels?.filter((hot) => hot.topReserved);
-  const topVisitedHotels = hotels?.filter((hot) => hot.topVisited);
 
   let restaurants = useRestaurants();
-  const topPlacesRestaurants = restaurants?.filter((item) => item.topPlace);
-  const topReservedRestaurants = restaurants?.filter((hot) => hot.topReserved);
-  const topVisitedRestaurants = restaurants?.filter((hot) => hot.topVisited);
 
-  const TopPlaces = [...topPlacesHotels, ...topPlacesRestaurants];
-  const topVisited = [...topVisitedHotels, ...topVisitedRestaurants];
-  const topReserved = [...topReservedHotels, ...topReservedRestaurants];
+  let AllInOne = [
+    ...tours,
+    ...transports,
+    ...services,
+    ...hotels,
+    ...exchanges,
+    ...markets,
+    ...restaurants,
+  ];
+  const TopPlaces = AllInOne?.filter((hot) => hot.topPlace);
+  const topReserved = AllInOne?.filter((hot) => hot.topReserved);
+  const topVisited = AllInOne?.filter((hot) => hot.topVisited);
 
   /*  const hotelsFilteredByName = useSelector((state) => state.search.hotels); */
 
@@ -61,9 +64,9 @@ export default function HomeScreen() {
   if (restaurants.length <= 0) {
     fetchRestaurants();
   }
-  if (users.length <= 0) {
-    fetchUsers();
-  }
+  /* if (currentUser.length <= 0) {
+    fetchcurrentUser();
+  } */
   if (tours.length <= 0) {
     fetchTours();
   }
@@ -79,6 +82,9 @@ export default function HomeScreen() {
   if (services.length <= 0) {
     fetchServices();
   }
+
+  const items = AllInOne?.filter((ht) => ht.isSponsor);
+
   return (
     <SafeAreaView className="bg-primary-background">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -86,7 +92,7 @@ export default function HomeScreen() {
         <Header
           hotels={hotels}
           restaurants={restaurants}
-          currentUser={users[0]}
+          currentUser={currentUser}
           tours={tours}
           markets={markets}
           transports={transports}
@@ -94,7 +100,7 @@ export default function HomeScreen() {
           services={services}
         />
         <View className="pb-32">
-          <ImageSection hotels={hotels} />
+          <ImageSection items={items} />
           {/* Buttons */}
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View className="flex-row pt-3 px-6 space-x-3">
