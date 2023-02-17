@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Icons
 import IconIonicons from "react-native-vector-icons/Ionicons";
-import IconAnt from "react-native-vector-icons/AntDesign";
+import IconEntypo from "react-native-vector-icons/Entypo";
 //Screens
 import LogInScreen from "./screens/LogInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -174,6 +174,29 @@ function MyTabs() {
           tabBarBadge: 1,
         }}
       /> */}
+      <Tab.Screen
+        name="Login"
+        component={LogInScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Login",
+          tabBarIcon: ({ color, size }) => (
+            <IconEntypo name="login" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Signup"
+        component={SignUpScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Signup",
+          tabBarIcon: ({ color, size }) => (
+            <IconEntypo name="login" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="SettingsTabScreen"
         component={SettingsScreen}

@@ -1,9 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import ItemEntypo from "react-native-vector-icons/Entypo";
-import ItemIonicons from "react-native-vector-icons/Ionicons";
 import ItemFeather from "react-native-vector-icons/Feather";
-import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 export default function ProfileHeader({ currentUser }) {
   const navigation = useNavigation();
@@ -15,9 +13,9 @@ export default function ProfileHeader({ currentUser }) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <ItemEntypo name="chevron-small-left" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
           <ItemIonicons name="settings-sharp" size={30} color="white" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View className="flex-row space-x-4 pt-6">
         <Image
