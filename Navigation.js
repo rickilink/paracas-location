@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSelector } from "react-redux";
 //Icons
 import IconIonicons from "react-native-vector-icons/Ionicons";
 import IconEntypo from "react-native-vector-icons/Entypo";
@@ -11,7 +12,6 @@ import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import MessagesScreen from "./screens/MessagesScreen";
-import { useSelector } from "react-redux";
 import HotelsScreen from "./screens/HotelSection/HotelsScreen";
 import RestaurantsScreen from "./screens/RestaurantSection/RestaurantsScreen";
 import ToursScreen from "./screens/ToursSection/ToursScreen";
@@ -208,17 +208,6 @@ function MyTabs() {
           ),
         }}
       />
-      {/*   <Tab.Screen
-        name="ProfilesTabScreen"
-        component={MyStackProfile}
-        options={{
-          headerShown: false,
-          tabBarLabel: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <IconAnt name="user" color={color} size={size} />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 }

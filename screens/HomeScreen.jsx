@@ -64,9 +64,6 @@ export default function HomeScreen() {
   if (restaurants.length <= 0) {
     fetchRestaurants();
   }
-  /* if (currentUser.length <= 0) {
-    fetchcurrentUser();
-  } */
   if (tours.length <= 0) {
     fetchTours();
   }

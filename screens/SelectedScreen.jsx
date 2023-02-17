@@ -21,8 +21,6 @@ export default function SelectedScreen() {
   const handleScroll = useAnimatedScrollHandler((event) => {
     // desactivar el desplazamiento vertical en el componente principal
     scrollViewRef.current?.scrollTo({ x: 0, animated: false });
-
-    console.log(scrollViewRef.current);
   });
   return (
     <GestureHandlerRootView className="relative pt-8 flex-1 bg-primary-background">

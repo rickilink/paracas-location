@@ -22,8 +22,6 @@ import {
 } from "firebase/auth";
 import { app, db } from "../firebase.config";
 
-import * as Google from "expo-auth-session/providers/google";
-import * as WebBrowser from "expo-web-browser";
 import { ANDROID_CLIENT_ID_DEV, CLIENT_ID, ANDROID_CLIENT_ID_PROD } from "@env";
 import { setCurrentUser } from "../redux/slices/authSlice";
 import { doc, getDoc } from "firebase/firestore";
@@ -34,17 +32,25 @@ export default function LogInScreen() {
   const [accessToken, setAccessToken] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const isAllFieldsFilled = emailRegex.test(email) && password.length > 5;
   /* const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     expoClientId: CLIENT_ID,
   }); */
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+  /*  const currentUser = useSelector((state) => state.auth.currentUser);
 
-  const navigation = useNavigation();
+  
   if (currentUser.name) {
     navigation.navigate("Home");
-  }
-
+  } */
+  const navigation = useNavigation();
   /*  const { user, loading } = useSelector((state) => state.user); */
 
   /* useEffect(() => {
@@ -71,7 +77,7 @@ export default function LogInScreen() {
 
   // Listen for changes in the user's authentication state
 
-  function pushUserToState(data) {
+  /*  function pushUserToState(data) {
     if (!currentUser.name || !currentUser.email || !currentUser.photoURL) {
       dispatch(
         setCurrentUser({
@@ -82,7 +88,7 @@ export default function LogInScreen() {
         })
       );
     }
-  }
+  } */
 
   const auth = getAuth(app);
   onAuthStateChanged(auth, (user) => {
@@ -95,7 +101,15 @@ export default function LogInScreen() {
         .then((doc) => {
           if (doc.exists()) {
             const userData = doc.data();
-            pushUserToState(userData);
+            dispatch(
+              setCurrentUser({
+                name: userData.name,
+                email: userData.email,
+                photoURL: userData.photoURL,
+                ...userData,
+              })
+            );
+            navigation.navigate("Home");
             // display user information in your app
           } else {
             console.log("No user data found");
@@ -114,7 +128,6 @@ export default function LogInScreen() {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         console.log("User logged in successfully");
-        navigation.navigate("Home");
       })
       .catch((error) => {
         console.log("Error logging in:", error);
@@ -141,18 +154,32 @@ export default function LogInScreen() {
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
-            className="bg-white w-full px-3 rounded-md h-[60px] text-primary-text"
+            className={
+              !emailRegex.test(email) && email.length != 0
+                ? "bg-white w-full px-3 rounded-md h-[60px] text-primary-danger border-primary-danger border-2"
+                : "bg-white w-full px-3 rounded-md h-[60px]   text-primary-contrast font-bold border-primary-contrast border-2"
+            }
           ></TextInput>
 
-          <View className="flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between">
+          <View
+            className={
+              password.length < 6 && password.length != 0
+                ? "flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between border-primary-danger border-2"
+                : "flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between border-primary-contrast border-2"
+            }
+          >
             <TextInput
               value={password}
               onChangeText={setPassword}
-              secureTextEntry
-              className=" text-primary-text flex-1  h-full "
+              secureTextEntry={isPasswordVisible}
+              className={
+                password.length < 6 && password.length != 0
+                  ? " text-primary-danger flex-1  h-full"
+                  : " text-primary-contrast flex-1  h-full"
+              }
               placeholder="Password"
             ></TextInput>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={togglePasswordVisibility}>
               <IconButton name="eye-with-line" color="#1BC4B9" size={25} />
             </TouchableOpacity>
           </View>
@@ -162,8 +189,13 @@ export default function LogInScreen() {
 
         <View className="mt-12">
           <TouchableOpacity
+            disabled={!isAllFieldsFilled}
             onPress={handleLogin}
-            className="w-full h-[70px] bg-primary-contrast rounded-md items-center justify-center"
+            className={
+              isAllFieldsFilled
+                ? "w-full h-[70px] bg-primary-contrast rounded-md items-center justify-center"
+                : "w-full h-[70px] bg-secondary-background rounded-md items-center justify-center"
+            }
           >
             <Text className="text-button-text font-bold text-xl">Log in</Text>
           </TouchableOpacity>

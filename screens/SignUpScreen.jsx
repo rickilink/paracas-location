@@ -1,51 +1,40 @@
 import { View, Text, TextInput, TouchableOpacity, Button } from "react-native";
-import { Appearance, useColorScheme } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import IconButton from "react-native-vector-icons/Entypo";
-import { WideButton } from "../components/WideButton";
 import { useState } from "react";
 import { app } from "../firebase.config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
 import { doc, setDoc } from "firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../redux/slices/authSlice";
 
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigation = useNavigation();
 
-  const handleInput1Change = (text) => {
-    setName(text);
-    checkInputs();
-  };
+  const dispatch = useDispatch();
 
-  const handleInput2Change = (text) => {
-    setLastName(text);
-    checkInputs();
-  };
+  const isAllFieldsFilled =
+    name.length > 3 &&
+    lastName.length > 3 &&
+    emailRegex.test(email) &&
+    password.length > 5;
 
-  const handleInput3Change = (text) => {
-    setEmail(text);
-    checkInputs();
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
-  const handleInput4Change = (text) => {
-    setPassword(text);
-    checkInputs();
-  };
-
-  const checkInputs = () => {
-    if (name && lastName && emailRegex.test(email) && password.length > 5) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+  const removeSpaces = (text) => {
+    return text.replace(/\s/g, "");
   };
   const handleSignUp = () => {
     const auth = getAuth(app);
@@ -65,6 +54,15 @@ export default function SignUpScreen() {
         })
           .then(() => {
             console.log("User document created successfully");
+            dispatch(
+              setCurrentUser({
+                name,
+                email,
+                phoneNumber: null,
+                photoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
+              })
+            );
             navigation.navigate("Home");
           })
           .catch((error) => {
@@ -98,33 +96,56 @@ export default function SignUpScreen() {
             <TextInput
               placeholder="Name"
               value={name}
-              onChangeText={handleInput1Change}
-              className="bg-white w-[49%] px-3 rounded-md h-[60px] text-primary-text"
+              onChangeText={(text) => setName(removeSpaces(text))}
+              className={
+                name.length <= 3 && name.length != 0
+                  ? "bg-button-text w-[49%] px-3 rounded-md h-[60px] text-primary-danger border-primary-danger border-2"
+                  : "bg-button-text w-[49%] px-3 rounded-md h-[60px] text-primary-contrast font-bold border-primary-contrast border-2 "
+              }
             ></TextInput>
             <TextInput
               placeholder="Last Name"
               value={lastName}
-              onChangeText={handleInput2Change}
-              className="bg-white w-[49%] px-3 rounded-md h-[60px] text-primary-text"
+              onChangeText={(text) => setLastName(removeSpaces(text))}
+              className={
+                lastName.length <= 3 && lastName.length != 0
+                  ? "bg-button-text w-[49%] px-3 rounded-md h-[60px]  text-primary-danger border-primary-danger border-2"
+                  : "bg-button-text w-[49%] px-3 rounded-md h-[60px] text-primary-contrast font-bold border-primary-contrast border-2"
+              }
             ></TextInput>
           </View>
           <TextInput
             placeholder="Email"
             value={email}
             keyboardType="email-address"
-            onChangeText={handleInput3Change}
-            className="bg-white w-full px-3 rounded-md h-[60px] text-primary-text"
+            onChangeText={(text) => setEmail(removeSpaces(text))}
+            className={
+              !emailRegex.test(email) && email.length != 0
+                ? "bg-white w-full px-3 rounded-md h-[60px] text-primary-danger border-primary-danger border-2"
+                : "bg-white w-full px-3 rounded-md h-[60px]   text-primary-contrast font-bold border-primary-contrast border-2"
+            }
           ></TextInput>
-          <View className="flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between">
+
+          <View
+            className={
+              password.length < 6 && password.length != 0
+                ? "flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between border-primary-danger border-2"
+                : "flex-row items-center bg-white w-full px-3 rounded-md h-[60px] justify-between border-primary-contrast border-2"
+            }
+          >
             <TextInput
               value={password}
-              onChangeText={handleInput4Change}
-              secureTextEntry
-              className=" text-primary-text flex-1  h-full"
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry={!isPasswordVisible}
+              className={
+                password.length < 6 && password.length != 0
+                  ? " text-primary-danger flex-1  h-full"
+                  : " text-primary-contrast flex-1  h-full"
+              }
               placeholder="Password"
               minLength={6}
             ></TextInput>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={togglePasswordVisibility}>
               <IconButton name="eye-with-line" color="#1BC4B9" size={25} />
             </TouchableOpacity>
           </View>
@@ -134,10 +155,10 @@ export default function SignUpScreen() {
 
         <View className="mt-12">
           <TouchableOpacity
-            disabled={isDisabled}
+            disabled={!isAllFieldsFilled}
             onPress={handleSignUp}
             className={
-              !isDisabled
+              isAllFieldsFilled
                 ? "w-full h-[70px] bg-primary-contrast rounded-md items-center justify-center"
                 : "w-full h-[70px] bg-secondary-background rounded-md items-center justify-center"
             }

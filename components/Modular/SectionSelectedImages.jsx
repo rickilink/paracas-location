@@ -31,7 +31,7 @@ export default function SectionSelectedImages({
         {gallery && (
           <CarrouselComponent
             images={gallery}
-            autoplayInterval={1500}
+            autoplayInterval={3000}
             handleScroll={handleScroll}
           />
         )}
