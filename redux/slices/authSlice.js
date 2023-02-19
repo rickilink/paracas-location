@@ -6,6 +6,9 @@ const initialState = {
     phoneNumber: null,
     email: null,
     photoURL: null,
+    uid: null,
+    favorite: [],
+    visited: [],
   },
   status: "idle", // idle || loading || succeeded || failed
   error: null,
@@ -17,25 +20,35 @@ const authSlice = createSlice({
   reducers: {
     // standard reducer logic, with auto-generated action types per reducer
     setCurrentUser: (state, action) => {
-      if (
-        !state.currentUser.name ||
-        !state.currentUser.email ||
-        !state.currentUser.photoURL ||
-        !state.currentUser.phoneNumber
-      ) {
-        return {
-          ...state,
-          currentUser: {
-            name: action.payload.name,
-            email: action.payload.email,
-            phoneNumber: action.payload.phoneNumber,
-            photoURL: action.payload.photoURL,
-          },
-        };
-      }
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+    },
+    updateFavorite: (state, action) => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favorite: [...state.currentUser.favorite, action.payload],
+        },
+      };
+    },
+
+    deleteFavorite: (state, action) => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favorite: state.currentUser.favorite.filter(
+            (item) => item.id !== action.payload.id
+          ),
+        },
+      };
     },
   },
 });
 
-export const { setCurrentUser } = authSlice.actions;
+export const { setCurrentUser, updateFavorite, deleteFavorite } =
+  authSlice.actions;
 export default authSlice.reducer;

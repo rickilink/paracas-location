@@ -20,8 +20,10 @@ import SelectedScreen from "./screens/SelectedScreen";
 import TransportsScreen from "./screens/TransportSection/TransportsScreen";
 import ExchangesScreen from "./screens/ExchangeScreen/ExchangesScreen";
 import ServicesScreen from "./screens/ServiceScreen/ServicesScreen";
+import RoutesScreen from "./screens/RouteScreen/RoutesScreen";
 
 const Tab = createBottomTabNavigator();
+
 const StackHomeScreen = createNativeStackNavigator();
 
 function MyStackHome() {
@@ -34,13 +36,7 @@ function MyStackHome() {
           headerShown: false,
         }}
       />
-      <StackHomeScreen.Screen
-        name="Login"
-        component={LogInScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+
       <StackHomeScreen.Screen
         name="Profile"
         component={ProfileScreen}
@@ -112,27 +108,6 @@ function MyStackHome() {
   );
 }
 
-function MyStackProfile() {
-  return (
-    <StackHomeScreen.Navigator initialRouteName="Home">
-      <StackHomeScreen.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <StackHomeScreen.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </StackHomeScreen.Navigator>
-  );
-}
-
 function MyTabs() {
   const { primaryContrast, primaryText, secondaryBackground } = useSelector(
     (state) => state.theme.colors
@@ -162,41 +137,37 @@ function MyTabs() {
           ),
         }}
       />
-      {/*  <Tab.Screen
-        name="MessagesTabScreen"
-        component={MessagesScreen}
-        options={{
-          headerShown: false,
-          tabBarLabel: "Messages",
-          tabBarIcon: ({ color, size }) => (
-            <IconAnt name="message1" color={color} size={size} />
-          ),
-          tabBarBadge: 1,
-        }}
-      /> */}
       <Tab.Screen
-        name="Login"
-        component={LogInScreen}
+        name="Routes"
+        component={RoutesScreen}
         options={{
           headerShown: false,
-          tabBarLabel: "Login",
+          tabBarLabel: "Routes",
           tabBarIcon: ({ color, size }) => (
-            <IconEntypo name="login" color={color} size={size} />
+            <IconIonicons name="home" color={color} size={size} />
           ),
         }}
       />
 
       <Tab.Screen
+        name="Login"
+        component={LogInScreen}
+        options={{
+          tabBarStyle: { display: "none" },
+          tabBarItemStyle: { width: 0, height: 0, position: "absolute" },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
         name="Signup"
         component={SignUpScreen}
         options={{
+          tabBarStyle: { display: "none" },
+          tabBarItemStyle: { width: 0, height: 0, position: "absolute" },
           headerShown: false,
-          tabBarLabel: "Signup",
-          tabBarIcon: ({ color, size }) => (
-            <IconEntypo name="login" color={color} size={size} />
-          ),
         }}
       />
+
       <Tab.Screen
         name="SettingsTabScreen"
         component={SettingsScreen}

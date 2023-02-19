@@ -6,6 +6,7 @@ import { useRoute } from "@react-navigation/native";
 import ProfileHeader from "../components/Profile/ProfileHeader";
 
 import ProfileSections from "../components/Profile/ProfileSections";
+import { DateStamp } from "../components/dateStamp";
 
 export default function ProfileScreen() {
   const {

@@ -47,7 +47,10 @@ export default function SignUpScreen() {
         const userRef = doc(db, "Users", uid);
         setDoc(userRef, {
           email,
+          uid,
+          visited: [],
           name: `${name} ${lastName}`,
+          favorite: [],
           photoURL:
             "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
           // add other information here as needed
@@ -58,7 +61,10 @@ export default function SignUpScreen() {
               setCurrentUser({
                 name,
                 email,
+                uid,
                 phoneNumber: null,
+                favorite: [],
+                visited: [],
                 photoURL:
                   "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
               })
@@ -117,6 +123,7 @@ export default function SignUpScreen() {
           <TextInput
             placeholder="Email"
             value={email}
+            autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={(text) => setEmail(removeSpaces(text))}
             className={
@@ -137,6 +144,7 @@ export default function SignUpScreen() {
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={!isPasswordVisible}
+              autoCapitalize="none"
               className={
                 password.length < 6 && password.length != 0
                   ? " text-primary-danger flex-1  h-full"

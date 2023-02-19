@@ -7,7 +7,6 @@ import Sections from "../components/Modular/Sections.jsx";
 import { useSelector } from "react-redux";
 import { fetchHotels, useHotels } from "../hooks/useHotels.js";
 import { fetchRestaurants, useRestaurants } from "../hooks/useRestaurant.js";
-import { fetchUsers, useCurrentUser, useUsers } from "../hooks/useUsers.js";
 import TopNavigationButton from "../components/HomeScreen/TopNavigationButton.jsx";
 import { fetchTours, useTours } from "../hooks/useTours.js";
 import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
@@ -25,9 +24,10 @@ export default function HomeScreen() {
     { title: "Transports", navigationUrl: "Transports" },
     { title: "Exchange", navigationUrl: "Exchanges" },
     { title: "Services", navigationUrl: "Services" },
+    { title: "Routes", navigationUrl: "Routes" },
   ];
 
-  let currentUser = useCurrentUser();
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
   let tours = useTours();
 

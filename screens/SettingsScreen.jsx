@@ -27,15 +27,8 @@ export default function SettingsScreen() {
     signOut(auth)
       .then(() => {
         console.log("User logged out successfully");
-        dispatch(
-          setCurrentUser({
-            name: null,
-            phoneNumber: null,
-            email: null,
-            photoURL: null,
-          })
-        );
-        navigation.navigate("Login");
+        dispatch(setCurrentUser([]));
+        navigation.navigate("Home");
         // clear user information from your app
       })
       .catch((error) => {
@@ -47,7 +40,8 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView className=" bg-primary-background flex-1">
       <View className="px-6">
-        <SettingHeader currentUser={currentUser} />
+        {currentUser && <SettingHeader currentUser={currentUser} />}
+
         <ScrollView>
           <View className="pb-6">
             <SettingOptions title="Your Info" />

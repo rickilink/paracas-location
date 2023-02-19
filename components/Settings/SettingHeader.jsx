@@ -15,12 +15,10 @@ export default function SettingHeader({ currentUser }) {
               }}
               className="w-12 h-12 rounded-full "
             />
-          ) : (
-            <View className="w-12 h-12 rounded-full bg-secondary-background"></View>
-          )}
+          ) : null}
 
           <Text className="text-primary-text text-xl font-bold capitalize ">
-            {currentUser?.name || "username"}
+            {currentUser?.name || null}
           </Text>
         </View>
       </View>

@@ -1,14 +1,18 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import ProfileModal from "./ProfileModal";
 
 export default function ProfileSectionLastVisited({ currentUser }) {
+  const [modalVisible, setModalVisible] = useState(false);
   const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const VisitedArrayFirst2 =
-    currentUser.Visited && currentUser.Visited.slice(0, 2);
 
+  let visitedArrayFirst2 = [];
+  if (currentUser) {
+    visitedArrayFirst2 = currentUser.visited && currentUser.visited.slice(-2);
+  }
   const navigation = useNavigation();
 
   const handleNavigation = (prop) => {
@@ -24,9 +28,9 @@ export default function ProfileSectionLastVisited({ currentUser }) {
       <View>
         <View className="flex-row items-center justify-between px-6">
           <Text className="text-primary-text text-xl font-semibold capitalize">
-            Last Visited
+            Last visited
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
             <Text className="text-primary-contrast font-semibold italic text-lg">
               see all
             </Text>
@@ -35,10 +39,15 @@ export default function ProfileSectionLastVisited({ currentUser }) {
       </View>
       {/* Body Section */}
 
-      {currentUser?.Visited.length > 0 && (
+      {currentUser && (
         <View className="mt-3 px-3 space-y-3 ">
+          <ProfileModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            items={currentUser.visited}
+          />
           <View className="flex-row h-[268px] justify-between">
-            {VisitedArrayFirst2.map((visited, index) => (
+            {visitedArrayFirst2?.map((visited, index) => (
               <TouchableOpacity
                 onPress={() => handleNavigation(visited)}
                 key={index}
@@ -54,11 +63,21 @@ export default function ProfileSectionLastVisited({ currentUser }) {
                   />
                   {/* TopRightHeart */}
                   <View className="absolute w-8 h-8 bg-primary-background rounded-bl-xl  top-0 right-0 items-center justify-center">
-                    <IconEntypo
-                      name="heart"
-                      size={25}
-                      color={primaryContrast}
-                    />
+                    {currentUser.favorite?.some(
+                      (el) => el.name === visited.name
+                    ) ? (
+                      <IconEntypo
+                        name="heart"
+                        size={30}
+                        color={primaryContrast}
+                      />
+                    ) : (
+                      <IconEntypo
+                        name="heart-outlined"
+                        size={30}
+                        color={primaryContrast}
+                      />
+                    )}
                   </View>
                   {/*bottom Left Effect */}
                   {/*  <View className="absolute w-[70px] h-[70px] bg-primary-background  rounded-br-3xl -bottom-[70px] left-0"></View> */}

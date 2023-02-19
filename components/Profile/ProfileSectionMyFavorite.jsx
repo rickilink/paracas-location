@@ -1,13 +1,20 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import ProfileModal from "./ProfileModal";
 
 export default function ProfileSectionMyFavorite({ currentUser }) {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
-  const favoritesArrayFirst2 =
-    currentUser.favorites && currentUser.favorites.slice(0, 2);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  let favoriteArrayFirst2 = [];
+
+  if (currentUser) {
+    favoriteArrayFirst2 =
+      currentUser.favorite && currentUser.favorite.slice(0, 2);
+  }
 
   const navigation = useNavigation();
 
@@ -24,9 +31,9 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
       <View>
         <View className="flex-row items-center justify-between px-6">
           <Text className="text-primary-text text-xl font-semibold capitalize">
-            My favorites
+            My favorite
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
             <Text className="text-primary-contrast font-semibold italic text-lg">
               see all
             </Text>
@@ -35,10 +42,15 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
       </View>
       {/* Body Section */}
 
-      {currentUser?.favorites.length > 0 && (
+      {currentUser && (
         <View className="mt-3 px-3 space-y-3 ">
+          <ProfileModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            items={currentUser.favorite}
+          />
           <View className="flex-row h-[268px] justify-between">
-            {favoritesArrayFirst2.map((fav, index) => (
+            {favoriteArrayFirst2?.map((fav, index) => (
               <TouchableOpacity
                 onPress={() => handleNavigation(fav)}
                 key={index}
@@ -53,13 +65,7 @@ export default function ProfileSectionMyFavorite({ currentUser }) {
                     className="w-full h-full rounded-br-3xl rounded-tl-3xl"
                   />
                   {/* TopRightHeart */}
-                  <View className="absolute w-8 h-8 bg-primary-background rounded-bl-xl  top-0 right-0 items-center justify-center">
-                    <IconEntypo
-                      name="heart"
-                      size={25}
-                      color={primaryContrast}
-                    />
-                  </View>
+
                   {/*bottom Left Effect */}
                   {/*  <View className="absolute w-[70px] h-[70px] bg-primary-background  rounded-br-3xl -bottom-[70px] left-0"></View> */}
                 </View>

@@ -11,6 +11,7 @@ import marketReducer from "./slices/marketSlice.js";
 import transportReducer from "./slices/transportSlice.js";
 import exchangeReducer from "./slices/exchangeSlice.js";
 import serviceReducer from "./slices/serviceSlice.js";
+import loadingReducer from "./slices/loadingSlice.js";
 
 export const store = configureStore({
   reducer: {
@@ -26,5 +27,6 @@ export const store = configureStore({
     transport: transportReducer,
     exchange: exchangeReducer,
     service: serviceReducer,
+    loading: loadingReducer,
   },
 });

@@ -74,7 +74,7 @@ export default function Header({
           </View>
         ) : (
           <View className=" flex-row justify-between flex-1 items-center ">
-            {currentUser.photoURL ? (
+            {currentUser && currentUser.photoURL ? (
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("Profile", {
@@ -91,9 +91,9 @@ export default function Header({
                 />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
                 <Text className="text-primary-contrast font-extrabold text-lg italic">
-                  Log In
+                  Registrate
                 </Text>
               </TouchableOpacity>
             )}
