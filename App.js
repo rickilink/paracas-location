@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Navigation from "./Navigation";
 import { store } from "./redux/store";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 export default function App() {
   return (

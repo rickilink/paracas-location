@@ -7,7 +7,7 @@ import {
   Button,
   Platform,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconButton from "react-native-vector-icons/Entypo";
@@ -34,6 +34,7 @@ export default function LogInScreen() {
   const [password, setPassword] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const navigation = useNavigation();
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -53,102 +54,42 @@ export default function LogInScreen() {
   if (currentUser.name) {
     navigation.navigate("Home");
   } */
-  const navigation = useNavigation();
   /*  const { user, loading } = useSelector((state) => state.user); */
 
-  /* useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      setAccessToken(id_token);
-      const credential = GoogleAuthProvider.credential(id_token);
-      signInWithCredential(auth, credential).then((data) =>
-        dispatch(
-          setCurrentUser({
-            name: data?.user.displayName,
-            email: data?.user.email,
-            photoURL: data?.user.photoURL,
-            phoneNumber: data?.user.phoneNumber,
-          })
-        )
-      );
-    }
-  }, [response]); */
-
-  /*  if (currentUser.name) {
-    navigation.navigate("Profile", { currentUser });
-  } */
-
-  // Listen for changes in the user's authentication state
-
-  /*  function pushUserToState(data) {
-    if (!currentUser.name || !currentUser.email || !currentUser.photoURL) {
-      dispatch(
-        setCurrentUser({
-          name: data.name,
-          email: data.email,
-          phoneNumber: data.phoneNumber || null,
-          photoURL: data.photoURL || null,
-        })
-      );
-    }
-  } */
-
   const auth = getAuth(app);
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const { uid } = user;
-
-      // Get the user's document from Firestore
-      const userRef = doc(db, "Users", uid);
-      getDoc(userRef)
-        .then((doc) => {
-          if (doc.exists()) {
-            /* console.log(doc.data()); */
-            const userData = doc.data();
-            const currentUser = userData;
-            dispatch(
-              setCurrentUser({
-                favorite: userData.favorite || null,
-                name: userData.name,
-                uid: userData.uid,
-                email: userData.email,
-                photoURL: userData.photoURL,
-                visited: userData.visited || null,
-              })
-            );
-            navigation.navigate("Home", { currentUser });
-            // display user information in your app
-          } else {
-            console.log("No user data found");
-          }
-        })
-        .catch((error) => {
-          console.error("Error getting user data:", error);
-        });
-    } else {
-      console.log("User is not logged in");
-      // clear user information from your app
-      dispatch(
-        setCurrentUser({
-          favorite: null,
-          name: null,
-          uid: null,
-          email: null,
-          photoURL: null,
-          visited: null,
-        })
-      );
-    }
-  });
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((user) => {
         console.log("User logged in successfully");
+        getCurrentUserFromDatabase(user);
       })
       .catch((error) => {
         console.warn("Error logging in:", error);
         Alert.alert("Error logging in", "Try again ");
+      });
+  };
+
+  const getCurrentUserFromDatabase = (user) => {
+    // Get the user's document from Firestore
+    const userRef = doc(db, "Users", user._tokenResponse.localId);
+    getDoc(userRef)
+      .then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data();
+          const currentUser = userData;
+
+          dispatch(setCurrentUser(currentUser));
+          navigation.navigate("Home", { currentUser });
+          // display user information in your app
+        } else {
+          console.log("No user data found");
+          Alert.alert("Error logging in", "No data found");
+        }
+      })
+      .catch((error) => {
+        console.error("Error getting user data:", error);
+        Alert.alert("Error getting user data", "Try again ");
       });
   };
 
@@ -171,6 +112,8 @@ export default function LogInScreen() {
           <TextInput
             placeholder="Email"
             value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
             onChangeText={(text) => setEmail(removeSpaces(text))}
             className={
               !emailRegex.test(email) && email.length != 0
@@ -189,7 +132,8 @@ export default function LogInScreen() {
             <TextInput
               value={password}
               onChangeText={setPassword}
-              secureTextEntry={isPasswordVisible}
+              secureTextEntry={!isPasswordVisible}
+              autoCapitalize="none"
               className={
                 password.length < 6 && password.length != 0
                   ? " text-primary-danger flex-1  h-full"

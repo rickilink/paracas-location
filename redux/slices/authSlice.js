@@ -8,6 +8,7 @@ const initialState = {
     photoURL: null,
     uid: null,
     favorite: [],
+    visited: [],
   },
   status: "idle", // idle || loading || succeeded || failed
   error: null,
@@ -21,18 +22,33 @@ const authSlice = createSlice({
     setCurrentUser: (state, action) => {
       return {
         ...state,
+        currentUser: action.payload,
+      };
+    },
+    updateFavorite: (state, action) => {
+      return {
+        ...state,
         currentUser: {
-          name: action.payload.name,
-          email: action.payload.email,
-          phoneNumber: action.payload.phoneNumber,
-          photoURL: action.payload.photoURL,
-          uid: action.payload.uid,
-          favorite: action.payload.favorite,
+          ...state.currentUser,
+          favorite: [...state.currentUser.favorite, action.payload],
+        },
+      };
+    },
+
+    deleteFavorite: (state, action) => {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favorite: state.currentUser.favorite.filter(
+            (item) => item.id !== action.payload.id
+          ),
         },
       };
     },
   },
 });
 
-export const { setCurrentUser } = authSlice.actions;
+export const { setCurrentUser, updateFavorite, deleteFavorite } =
+  authSlice.actions;
 export default authSlice.reducer;

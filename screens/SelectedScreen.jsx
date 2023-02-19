@@ -20,7 +20,9 @@ import IconEntypo from "react-native-vector-icons/Entypo"; //heart  heart-outlin
 import useTheme from "../hooks/useTheme";
 import { db } from "../firebase.config";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteFavorite, updateFavorite } from "../redux/slices/authSlice";
+import { DateStamp } from "../components/dateStamp";
 
 export default function SelectedScreen() {
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -29,25 +31,35 @@ export default function SelectedScreen() {
     params: { ItemDetails },
   } = useRoute();
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const { primaryContrast } = useTheme();
   const scrollViewRef = useRef(null);
 
   useState(() => {
-    const collectionRef = doc(db, "Users", currentUser.uid);
-    updateDoc(
-      collectionRef,
-      {
-        visited: arrayUnion(ItemDetails),
-      },
-      { merge: true }
-    )
-      .then(() => {
-        console.log("added to resent visited successfully!");
-      })
-      .catch((error) => {
-        console.error("Error updating resent visited document:", error);
-      });
+    const exists = currentUser?.visited.find(
+      (visitedCity) => visitedCity.name === ItemDetails.name
+    );
+
+    if (exists) {
+      console.log("The city has been visited");
+    } else {
+      const collectionRef = doc(db, "Users", currentUser.uid);
+      updateDoc(
+        collectionRef,
+        {
+          visited: arrayUnion(ItemDetails),
+        },
+        { merge: true }
+      )
+        .then(() => {
+          console.log("added to resent visited successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating resent visited document:", error);
+        });
+    }
+    /*  */
   }, []);
 
   const handleAddFavorite = () => {
@@ -57,8 +69,8 @@ export default function SelectedScreen() {
     })
       .then(() => {
         console.log("Document added successfully!");
-        Alert.alert("added to favorites", "Please Log in again");
-        navigation.navigate("Login");
+        dispatch(updateFavorite(ItemDetails));
+        console.log("Document added to local storage!");
       })
       .catch((error) => {
         console.error("Error added favorites document:", error);
@@ -72,8 +84,8 @@ export default function SelectedScreen() {
     })
       .then(() => {
         console.log("Document deleted successfully!");
-        Alert.alert("deleted from favorites", "Please Log in again");
-        navigation.navigate("Login");
+        dispatch(deleteFavorite(ItemDetails));
+        console.log("Document deleted from local storage!");
       })
       .catch((error) => {
         console.error("Error deleted favorites document:", error);

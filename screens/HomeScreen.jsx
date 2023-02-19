@@ -7,14 +7,12 @@ import Sections from "../components/Modular/Sections.jsx";
 import { useSelector } from "react-redux";
 import { fetchHotels, useHotels } from "../hooks/useHotels.js";
 import { fetchRestaurants, useRestaurants } from "../hooks/useRestaurant.js";
-import { fetchUsers, useCurrentUser, useUsers } from "../hooks/useUsers.js";
 import TopNavigationButton from "../components/HomeScreen/TopNavigationButton.jsx";
 import { fetchTours, useTours } from "../hooks/useTours.js";
 import { fetchMarkets, useMarkets } from "../hooks/useMarkets.js";
 import { fetchTransports, useTransports } from "../hooks/useTransport.js";
 import { fetchExchanges, useExchanges } from "../hooks/useExchange.js";
 import { fetchServices, useServices } from "../hooks/useService.js";
-import { useRoute } from "@react-navigation/native";
 
 export default function HomeScreen() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
@@ -26,11 +24,10 @@ export default function HomeScreen() {
     { title: "Transports", navigationUrl: "Transports" },
     { title: "Exchange", navigationUrl: "Exchanges" },
     { title: "Services", navigationUrl: "Services" },
+    { title: "Routes", navigationUrl: "Routes" },
   ];
 
-  const {
-    params: { currentUser },
-  } = useRoute();
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
   let tours = useTours();
 

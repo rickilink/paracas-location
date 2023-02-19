@@ -69,19 +69,7 @@ export default function SignUpScreen() {
                   "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
               })
             );
-            navigation.navigate(
-              "Home",
-              currentUser({
-                name,
-                email,
-                uid,
-                phoneNumber: null,
-                favorite: [],
-                visited: [],
-                photoURL:
-                  "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
-              })
-            );
+            navigation.navigate("Home");
           })
           .catch((error) => {
             console.error("Error creating user document:", error);
@@ -135,6 +123,7 @@ export default function SignUpScreen() {
           <TextInput
             placeholder="Email"
             value={email}
+            autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={(text) => setEmail(removeSpaces(text))}
             className={
@@ -155,6 +144,7 @@ export default function SignUpScreen() {
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={!isPasswordVisible}
+              autoCapitalize="none"
               className={
                 password.length < 6 && password.length != 0
                   ? " text-primary-danger flex-1  h-full"
