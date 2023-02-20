@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
 //Icons
 import IconIonicons from "react-native-vector-icons/Ionicons";
-import IconEntypo from "react-native-vector-icons/Entypo";
+import IconFontAwesome5 from "react-native-vector-icons/FontAwesome5";
 //Screens
 import LogInScreen from "./screens/LogInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
@@ -144,7 +144,7 @@ function MyTabs() {
           headerShown: false,
           tabBarLabel: "Routes",
           tabBarIcon: ({ color, size }) => (
-            <IconIonicons name="home" color={color} size={size} />
+            <IconFontAwesome5 name="route" color={color} size={size} />
           ),
         }}
       />

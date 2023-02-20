@@ -13,6 +13,7 @@ import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import useTheme from "../../hooks/useTheme";
 import { useSelector } from "react-redux";
+
 export default function RoutesScreen() {
   const [hotel1, setHotel1] = useState({});
   const [agency1, setAgency1] = useState({});
@@ -110,10 +111,25 @@ export default function RoutesScreen() {
                   )}
 
                   <View className="-ml-5 pt-3 min-w-[100px] max-w-[120px] space-y-1">
-                    <Text className="text-primary-text">check-in: 10:00am</Text>
-                    <Text className="text-primary-text">
-                      check-out: 10:00am
-                    </Text>
+                    {Object.keys(hotel1).length > 0 ? (
+                      <Text className="text-primary-text">
+                        {hotel1.checkIn}
+                      </Text>
+                    ) : (
+                      <Text className="text-primary-text">
+                        check-in: 10:00am
+                      </Text>
+                    )}
+
+                    {Object.keys(hotel1).length > 0 ? (
+                      <Text className="text-primary-text">
+                        {hotel1.checkOut}
+                      </Text>
+                    ) : (
+                      <Text className="text-primary-text">
+                        check-out: 10:00am
+                      </Text>
+                    )}
                   </View>
                 </View>
 

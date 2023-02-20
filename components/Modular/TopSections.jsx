@@ -12,11 +12,9 @@ export default function TopSections(props) {
 
   function handleRedirect(to) {
     const ItemDetails = to;
-    const currentUser = props.currentUser;
 
     navigation.navigate("SelectedSection", {
       ItemDetails,
-      currentUser,
     });
   }
 
