@@ -37,29 +37,30 @@ export default function SelectedScreen() {
   const scrollViewRef = useRef(null);
 
   useState(() => {
-    const exists = currentUser?.visited.find(
-      (visitedCity) => visitedCity.name === ItemDetails.name
-    );
+    if (currentUser.length > 0) {
+      const exists = currentUser?.visited.find(
+        (visitedCity) => visitedCity.name === ItemDetails.name
+      );
 
-    if (exists) {
-      console.log("The city has been visited");
-    } else {
-      const collectionRef = doc(db, "Users", currentUser.uid);
-      updateDoc(
-        collectionRef,
-        {
-          visited: arrayUnion(ItemDetails),
-        },
-        { merge: true }
-      )
-        .then(() => {
-          console.log("added to resent visited successfully!");
-        })
-        .catch((error) => {
-          console.error("Error updating resent visited document:", error);
-        });
+      if (exists) {
+        console.log("The city has been visited");
+      } else {
+        const collectionRef = doc(db, "Users", currentUser.uid);
+        updateDoc(
+          collectionRef,
+          {
+            visited: arrayUnion(ItemDetails),
+          },
+          { merge: true }
+        )
+          .then(() => {
+            console.log("added to resent visited successfully!");
+          })
+          .catch((error) => {
+            console.error("Error updating resent visited document:", error);
+          });
+      }
     }
-    /*  */
   }, []);
 
   const handleAddFavorite = () => {
@@ -107,23 +108,25 @@ export default function SelectedScreen() {
       <ScrollView showsVerticalScrollIndicator={false} ref={scrollViewRef}>
         <View className=" pb-10  ">
           {/* Hearth */}
+          {currentUser.length > 0 && (
+            <TouchableOpacity
+              onPress={() => handleFavorite()}
+              className="absolute right-5 top-5 w-10 h-10 items-center justify-center z-20"
+            >
+              {currentUser.favorite?.some(
+                (el) => el.name === ItemDetails.name
+              ) ? (
+                <IconEntypo name="heart" size={30} color={primaryContrast} />
+              ) : (
+                <IconEntypo
+                  name="heart-outlined"
+                  size={30}
+                  color={primaryContrast}
+                />
+              )}
+            </TouchableOpacity>
+          )}
 
-          <TouchableOpacity
-            onPress={() => handleFavorite()}
-            className="absolute right-5 top-5 w-10 h-10 items-center justify-center z-20"
-          >
-            {currentUser.favorite?.some(
-              (el) => el.name === ItemDetails.name
-            ) ? (
-              <IconEntypo name="heart" size={30} color={primaryContrast} />
-            ) : (
-              <IconEntypo
-                name="heart-outlined"
-                size={30}
-                color={primaryContrast}
-              />
-            )}
-          </TouchableOpacity>
           <View className=" px-6">
             <SectionSelectedHeader
               name={ItemDetails.name || "name"}
@@ -160,7 +163,13 @@ export default function SelectedScreen() {
         </View>
       </ScrollView>
 
-      <HotelBookModal price={ItemDetails.price} />
+      {ItemDetails.isSponsor && (
+        <HotelBookModal
+          price={ItemDetails.price}
+          destination={ItemDetails.name}
+          roomType={ItemDetails.roomType}
+        />
+      )}
     </GestureHandlerRootView>
   );
 }

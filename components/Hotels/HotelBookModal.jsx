@@ -12,17 +12,27 @@ import { useNavigation } from "@react-navigation/native";
 
 import ModalBookRoom from "./Modal/ModalBookRoom";
 
-export default function HotelBookModal({ price }) {
+export default function HotelBookModal({ price, destination, roomType }) {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+  const [dataInserted, setDateInserted] = useState(null);
 
   const handleOpenModal = () => {
     setModalVisible(true);
   };
 
-  const handleFilter = () => {
+  const isAllFieldsFilled =
+    dataInserted?.dateValue &&
+    dataInserted?.destinationValue &&
+    dataInserted?.guestsValue &&
+    dataInserted?.nightsValue &&
+    dataInserted?.typeValue;
+  const handleCreateApplication = () => {
     setModalVisible(false);
-    Alert.alert("Gracias por Utilizar esta Demo", "Grax");
+    Alert.alert(
+      "Orden Pendiente de Confirmación",
+      `Fecha: ${dataInserted.dateValue}     Lugar: ${dataInserted.destinationValue}     Personas: ${dataInserted.guestsValue}    Noches: ${dataInserted.nightsValue}     Habitación: ${dataInserted.typeValue}`
+    );
 
     navigation.navigate("Home");
   };
@@ -49,13 +59,22 @@ export default function HotelBookModal({ price }) {
             <View className="m-6 h-screen rounded-lg  ">
               {/* Body */}
               <View className="pb-3">
-                <ModalBookRoom />
+                <ModalBookRoom
+                  destination={destination}
+                  roomType={roomType}
+                  setDateInserted={setDateInserted}
+                />
               </View>
             </View>
             <View className="absolute bottom-3 items-center justify-center w-screen px-6">
               <TouchableOpacity
-                onPress={() => handleFilter()}
-                className="bg-primary-contrast h-[70px] rounded-lg w-full justify-center items-center"
+                disabled={!isAllFieldsFilled}
+                onPress={() => handleCreateApplication()}
+                className={
+                  isAllFieldsFilled
+                    ? "bg-primary-contrast h-[70px] rounded-lg w-full justify-center items-center"
+                    : "bg-primary-background h-[70px] rounded-lg w-full justify-center items-center"
+                }
               >
                 <Text className="font-bold text-button-text text-lg ">
                   Create Application Request
