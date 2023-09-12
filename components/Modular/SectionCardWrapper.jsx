@@ -14,26 +14,28 @@ export default function SectionCardWrapper({ Items, type }) {
   let leftItems = [];
   let rightItems = [];
 
+  //! TODO:   REFACTOR THIS!!!
+
   switch (type) {
-    case "hotel":
+    case "Hotels":
       FilteredItems = useFilter();
       break;
-    case "restaurant":
+    case "Restaurants":
       FilteredItems = useRestaurantFilter();
       break;
-    case "tour":
+    case "Tours":
       FilteredItems = useTourFilter();
       break;
-    case "market":
+    case "Markets":
       FilteredItems = useMarketFilter();
       break;
-    case "transport":
+    case "Transport":
       FilteredItems = useTransportFilter();
       break;
-    case "exchange":
+    case "Exchanges":
       FilteredItems = useExchangeFilter();
       break;
-    case "service":
+    case "Services":
       FilteredItems = useServiceFilter();
       break;
 

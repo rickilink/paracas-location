@@ -1,5 +1,5 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Header from "../components/HomeScreen/Header.jsx";
 import ImageSection from "../components/HomeScreen/ImageSection.jsx";
@@ -16,6 +16,7 @@ import { fetchServices, useServices } from "../hooks/useService.js";
 
 export default function HomeScreen() {
   const { primaryContrast } = useSelector((state) => state.theme.colors);
+  const [isLoading, setIsLoading] = useState(false);
   const Buttons = [
     { title: "Hotels", navigationUrl: "Hotels" },
     { title: "Restaurants", navigationUrl: "Restaurants" },
@@ -86,6 +87,7 @@ export default function HomeScreen() {
     <SafeAreaView className="bg-primary-background">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header contains search input */}
+
         <Header
           hotels={hotels}
           restaurants={restaurants}

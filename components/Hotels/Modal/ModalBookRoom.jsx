@@ -116,6 +116,7 @@ export default function ModalBookRoom({
                 {roomType &&
                   Object.entries(roomType).map(([key, value]) => (
                     <TouchableOpacity
+                      key={key}
                       onPress={() => handleSelectType({ key, value })}
                       className="py-4 items-center justify-center bg-primary-background rounded-md my-2"
                     >

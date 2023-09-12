@@ -11,6 +11,7 @@ import { db } from "../firebase.config";
 import { doc, setDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../redux/slices/authSlice";
+import { PHOTO_URL_SIGNUP } from "@env";
 
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
@@ -51,8 +52,7 @@ export default function SignUpScreen() {
           visited: [],
           name: `${name} ${lastName}`,
           favorite: [],
-          photoURL:
-            "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
+          photoURL: PHOTO_URL_SIGNUP,
           // add other information here as needed
         })
           .then(() => {
@@ -65,8 +65,7 @@ export default function SignUpScreen() {
                 phoneNumber: null,
                 favorite: [],
                 visited: [],
-                photoURL:
-                  "https://firebasestorage.googleapis.com/v0/b/paracas-location.appspot.com/o/Users%2FuserIcon.jpg?alt=media&token=858eb69c-0afb-40cf-adc4-bed0743287dd",
+                photoURL: PHOTO_URL_SIGNUP,
               })
             );
             navigation.navigate("Home");

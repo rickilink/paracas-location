@@ -18,6 +18,8 @@ export default function TopSections(props) {
     });
   }
 
+  //! TODO:   REFACTOR THIS!!!
+
   switch (props.type) {
     case "Top Places":
       arrayToNavigate = props.TopPlaces;

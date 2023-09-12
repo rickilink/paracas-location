@@ -18,27 +18,29 @@ export default function SectionFilterModal({ type, Items }) {
   let filter = [];
   const { primaryContrast } = useTheme();
 
+  //! TODO:   REFACTOR THIS!!!
+
   switch (type) {
-    case "hotel":
+    case "Hotels":
       filter = useFilterByFilteredFeatures();
 
       break;
-    case "restaurant":
+    case "Restaurants":
       filter = useRestaurantFilterByFilteredFeatures();
       break;
-    case "tour":
+    case "Tours":
       filter = useTourFilterByFilteredFeatures();
       break;
-    case "market":
+    case "Markets":
       filter = useMarketFilterByFilteredFeatures();
       break;
-    case "transport":
+    case "Transport":
       filter = useTransportFilterByFilteredFeatures();
       break;
-    case "exchange":
+    case "Exchanges":
       filter = useExchangeFilterByFilteredFeatures();
       break;
-    case "service":
+    case "Services":
       filter = useServiceFilterByFilteredFeatures();
       break;
     default:

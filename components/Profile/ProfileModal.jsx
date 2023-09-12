@@ -16,8 +16,9 @@ export default function ProfileModal({ modalVisible, setModalVisible, items }) {
         <Text className="text-lg font-bold my-4">Select an option:</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <TouchableOpacity
+                key={index}
                 className="'p-4 border-b border-b-primary-contrast bg-secondary-background rounded-md  w-full "
                 onPress={() => {
                   setModalVisible(false);

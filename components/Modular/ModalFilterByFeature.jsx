@@ -38,9 +38,11 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
   const dispatch = useDispatch();
   const uniqueFeatures = [...new Set(allFeatures)];
 
+  //! TODO:   REFACTOR THIS!!!
+
   const handleAddFeature = (feature) => {
     switch (type) {
-      case "hotel": // Case Hotel
+      case "Hotels": // Case Hotel
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setFeaturesToFilter(FeaturesToFilter.filter((f) => f !== feature))
@@ -51,7 +53,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         dispatch(setFilter());
 
         break;
-      case "restaurant": // Case Restaurant
+      case "Restaurants": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setRestaurantFeaturesToFilter(
@@ -66,7 +68,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         dispatch(setRestaurantFilter());
 
         break;
-      case "tour": // Case Restaurant
+      case "Tours": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setTourFeaturesToFilter(
@@ -79,7 +81,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         dispatch(setTourFilter());
 
         break;
-      case "market": // Case Restaurant
+      case "Markets": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setMarketFeaturesToFilter(
@@ -92,7 +94,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         dispatch(setMarketFilter());
 
         break;
-      case "transport": // Case Restaurant
+      case "Transport": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setTransportFeaturesToFilter(
@@ -108,7 +110,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
 
         break;
 
-      case "exchange": // Case Restaurant
+      case "Exchanges": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setExchangeFeaturesToFilter(
@@ -121,7 +123,7 @@ export default function ModalFilterByFeature({ type, filter, Items }) {
         dispatch(setExchangeFilter());
 
         break;
-      case "service": // Case Restaurant
+      case "Services": // Case Restaurant
         if (FeaturesToFilter.includes(feature)) {
           dispatch(
             setServiceFeaturesToFilter(
